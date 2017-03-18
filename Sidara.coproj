@@ -25,6 +25,7 @@
         <Option name="nostartfiles" value="1"/>
         <Option name="LTO" value="0"/>
         <Option name="IsNewStartupCode" value="1"/>
+        <Option name="Library" value="Not use C Library"/>
         <LinkedLibraries/>
         <MemoryAreas debugInFlashNotRAM="1">
           <Memory name="IROM1" type="ReadOnly" size="0x00100000" startValue="0x08000000"/>
@@ -84,37 +85,77 @@
   <Files>
     <File name="cmsis_lib/source/stm32f4xx_gpio.c" path="cmsis_lib/source/stm32f4xx_gpio.c" type="1"/>
     <File name="cmsis_lib/include/stm32f4xx_i2c.h" path="cmsis_lib/include/stm32f4xx_i2c.h" type="1"/>
-    <File name="cmsis_boot/startup/startup_stm32f4xx.c" path="cmsis_boot/startup/startup_stm32f4xx.c" type="1"/>
+    <File name="fatfs/drivers" path="" type="2"/>
     <File name="cmsis_lib/source/stm32f4xx_dma.c" path="cmsis_lib/source/stm32f4xx_dma.c" type="1"/>
-    <File name="cmsis_lib/source/stm32f4xx_rcc.c" path="cmsis_lib/source/stm32f4xx_rcc.c" type="1"/>
-    <File name="cmsis/core_cmInstr.h" path="cmsis/core_cmInstr.h" type="1"/>
+    <File name="cmsis_lib/source/stm32f4xx_usart.c" path="cmsis_lib/source/stm32f4xx_usart.c" type="1"/>
+    <File name="fatfs/drivers/fatfs_sd_sdio.h" path="fatfs/drivers/fatfs_sd_sdio.h" type="1"/>
+    <File name="fatfs/diskio.h" path="fatfs/diskio.h" type="1"/>
+    <File name="fatfs/integer.h" path="fatfs/integer.h" type="1"/>
     <File name="cmsis_lib/include/stm32f4xx_dac.h" path="cmsis_lib/include/stm32f4xx_dac.h" type="1"/>
     <File name="cmsis_boot" path="" type="2"/>
-    <File name="cmsis_lib/include/stm32f4xx_adc.h" path="cmsis_lib/include/stm32f4xx_adc.h" type="1"/>
-    <File name="cmsis/core_cm4_simd.h" path="cmsis/core_cm4_simd.h" type="1"/>
-    <File name="cmsis_boot/startup" path="" type="2"/>
+    <File name="cmsis_lib/include/stm32f4xx_usart.h" path="cmsis_lib/include/stm32f4xx_usart.h" type="1"/>
+    <File name="fatfs/drivers/fatfs_sd_sdio.h~RF5b1858c.TMP" path="fatfs/drivers/fatfs_sd_sdio.h~RF5b1858c.TMP" type="1"/>
+    <File name="fatfs/drivers/fatfs_sdram.h" path="fatfs/drivers/fatfs_sdram.h" type="1"/>
+    <File name="fatfs/option/cc949.c" path="fatfs/option/cc949.c" type="1"/>
+    <File name="fatfs/drivers/fatfs_sd_sdio.c" path="fatfs/drivers/fatfs_sd_sdio.c" type="1"/>
+    <File name="fatfs" path="" type="2"/>
     <File name="cmsis_boot/stm32f4xx.h" path="cmsis_boot/stm32f4xx.h" type="1"/>
+    <File name="cmsis_boot/startup" path="" type="2"/>
+    <File name="cmsis/core_cm4_simd.h" path="cmsis/core_cm4_simd.h" type="1"/>
     <File name="cmsis_lib/source/stm32f4xx_spi.c" path="cmsis_lib/source/stm32f4xx_spi.c" type="1"/>
-    <File name="cmsis_lib/include/stm32f4xx_exti.h" path="cmsis_lib/include/stm32f4xx_exti.h" type="1"/>
     <File name="cmsis/core_cmFunc.h" path="cmsis/core_cmFunc.h" type="1"/>
-    <File name="cmsis_lib/source/stm32f4xx_exti.c" path="cmsis_lib/source/stm32f4xx_exti.c" type="1"/>
     <File name="cmsis/core_cm4.h" path="cmsis/core_cm4.h" type="1"/>
-    <File name="cmsis_boot/system_stm32f4xx.c" path="cmsis_boot/system_stm32f4xx.c" type="1"/>
-    <File name="cmsis_lib/include/stm32f4xx_spi.h" path="cmsis_lib/include/stm32f4xx_spi.h" type="1"/>
-    <File name="cmsis" path="" type="2"/>
-    <File name="cmsis_lib/source/stm32f4xx_adc.c" path="cmsis_lib/source/stm32f4xx_adc.c" type="1"/>
+    <File name="fatfs/drivers/fatfs_usb.h" path="fatfs/drivers/fatfs_usb.h" type="1"/>
+    <File name="tm_stm32f4_fatfs.c" path="tm_stm32f4_fatfs.c" type="1"/>
+    <File name="fatfs/drivers/fatfs_spi_flash.h" path="fatfs/drivers/fatfs_spi_flash.h" type="1"/>
     <File name="cmsis_lib/include/stm32f4xx_tim.h" path="cmsis_lib/include/stm32f4xx_tim.h" type="1"/>
-    <File name="cmsis_lib" path="" type="2"/>
+    <File name="cmsis_lib/source/stm32f4xx_adc.c" path="cmsis_lib/source/stm32f4xx_adc.c" type="1"/>
+    <File name="fatfs/ff.c" path="fatfs/ff.c" type="1"/>
     <File name="cmsis_lib/source/stm32f4xx_i2c.c" path="cmsis_lib/source/stm32f4xx_i2c.c" type="1"/>
+    <File name="fatfs/drivers/fatfs_sd_sdio.h~RF860ba07.TMP" path="fatfs/drivers/fatfs_sd_sdio.h~RF860ba07.TMP" type="1"/>
     <File name="cmsis_lib/source" path="" type="2"/>
-    <File name="cmsis_lib/include/stm32f4xx_dma.h" path="cmsis_lib/include/stm32f4xx_dma.h" type="1"/>
-    <File name="cmsis_lib/source/stm32f4xx_tim.c" path="cmsis_lib/source/stm32f4xx_tim.c" type="1"/>
-    <File name="cmsis_lib/include/stm32f4xx_gpio.h" path="cmsis_lib/include/stm32f4xx_gpio.h" type="1"/>
+    <File name="fatfs/drivers/desktop.ini" path="fatfs/drivers/desktop.ini" type="1"/>
     <File name="cmsis_boot/stm32f4xx_conf.h" path="cmsis_boot/stm32f4xx_conf.h" type="1"/>
     <File name="cmsis_boot/system_stm32f4xx.h" path="cmsis_boot/system_stm32f4xx.h" type="1"/>
     <File name="cmsis_lib/source/stm32f4xx_dac.c" path="cmsis_lib/source/stm32f4xx_dac.c" type="1"/>
-    <File name="cmsis_lib/include" path="" type="2"/>
     <File name="cmsis_lib/include/stm32f4xx_rcc.h" path="cmsis_lib/include/stm32f4xx_rcc.h" type="1"/>
+    <File name="fatfs/drivers/fatfs_usb.c" path="fatfs/drivers/fatfs_usb.c" type="1"/>
+    <File name="fatfs/option/unicode.c" path="fatfs/option/unicode.c" type="1"/>
+    <File name="fatfs/option/cc936.c" path="fatfs/option/cc936.c" type="1"/>
+    <File name="cmsis_boot/startup/startup_stm32f4xx.c" path="cmsis_boot/startup/startup_stm32f4xx.c" type="1"/>
+    <File name="fatfs/00readme.txt" path="fatfs/00readme.txt" type="1"/>
+    <File name="cmsis_lib/source/stm32f4xx_rcc.c" path="cmsis_lib/source/stm32f4xx_rcc.c" type="1"/>
+    <File name="cmsis/core_cmInstr.h" path="cmsis/core_cmInstr.h" type="1"/>
+    <File name="fatfs/drivers/fatfs_sd_sdio.h~RF4b994b8.TMP" path="fatfs/drivers/fatfs_sd_sdio.h~RF4b994b8.TMP" type="1"/>
+    <File name="fatfs/option/ccsbcs.c" path="fatfs/option/ccsbcs.c" type="1"/>
+    <File name="fatfs/option/desktop.ini" path="fatfs/option/desktop.ini" type="1"/>
+    <File name="fatfs/drivers/fatfs_sdram.c" path="fatfs/drivers/fatfs_sdram.c" type="1"/>
+    <File name="fatfs/diskio.c" path="fatfs/diskio.c" type="1"/>
+    <File name="fatfs/drivers/fatfs_sd.c" path="fatfs/drivers/fatfs_sd.c" type="1"/>
+    <File name="fatfs/ff.h" path="fatfs/ff.h" type="1"/>
+    <File name="cmsis_lib/include/stm32f4xx_adc.h" path="cmsis_lib/include/stm32f4xx_adc.h" type="1"/>
+    <File name="cmsis_lib/include/stm32f4xx_exti.h" path="cmsis_lib/include/stm32f4xx_exti.h" type="1"/>
+    <File name="cmsis_lib/source/stm32f4xx_exti.c" path="cmsis_lib/source/stm32f4xx_exti.c" type="1"/>
+    <File name="cmsis_boot/system_stm32f4xx.c" path="cmsis_boot/system_stm32f4xx.c" type="1"/>
+    <File name="cmsis_lib/include/stm32f4xx_spi.h" path="cmsis_lib/include/stm32f4xx_spi.h" type="1"/>
+    <File name="fatfs/drivers/fatfs_sd_sdio.h~RF9a0a4f.TMP" path="fatfs/drivers/fatfs_sd_sdio.h~RF9a0a4f.TMP" type="1"/>
+    <File name="fatfs/history.txt" path="fatfs/history.txt" type="1"/>
+    <File name="cmsis" path="" type="2"/>
+    <File name="fatfs/option" path="" type="2"/>
+    <File name="cmsis_lib" path="" type="2"/>
+    <File name="fatfs/option/cc950.c" path="fatfs/option/cc950.c" type="1"/>
+    <File name="cmsis_lib/include/stm32f4xx_dma.h" path="cmsis_lib/include/stm32f4xx_dma.h" type="1"/>
+    <File name="fatfs/option/cc932.c" path="fatfs/option/cc932.c" type="1"/>
+    <File name="cmsis_lib/source/stm32f4xx_tim.c" path="cmsis_lib/source/stm32f4xx_tim.c" type="1"/>
+    <File name="fatfs/drivers/fatfs_sd.h" path="fatfs/drivers/fatfs_sd.h" type="1"/>
+    <File name="cmsis_lib/include/stm32f4xx_gpio.h" path="cmsis_lib/include/stm32f4xx_gpio.h" type="1"/>
+    <File name="fatfs/desktop.ini" path="fatfs/desktop.ini" type="1"/>
+    <File name="attributes.h" path="attributes.h" type="1"/>
+    <File name="fatfs/ffconf.h" path="fatfs/ffconf.h" type="1"/>
+    <File name="cmsis_lib/include" path="" type="2"/>
+    <File name="tm_stm32f4_fatfs.h" path="tm_stm32f4_fatfs.h" type="1"/>
+    <File name="fatfs/option/syscall.c" path="fatfs/option/syscall.c" type="1"/>
+    <File name="fatfs/drivers/fatfs_spi_flash.c" path="fatfs/drivers/fatfs_spi_flash.c" type="1"/>
     <File name="main.c" path="main.c" type="1"/>
   </Files>
 </Project>
