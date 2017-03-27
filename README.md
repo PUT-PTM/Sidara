@@ -1,5 +1,7 @@
 # Sidara
 
+## Open source academic project for Microprocessors Lab
+
 Sidara is a project of basic acoustic guitar simulator, that uses optic sensor, DAC, and card reader to produce basic guitar chord sounds.
 Built on STM32F407G microprocessor. 
 
@@ -21,4 +23,4 @@ Idea, implementation and copyrights to:
   <li>Dawid Wojciechowski (TheSensej)</li>
 </ul>
 
-Contact: <a href="mailto:michal.sibera@windowslive.com">Arebis</a> or <a href="mailto:wojciechdavid@gmail.com">TheSensej</a>
+#### Contact: <a href="mailto:michal.sibera@windowslive.com">Arebis</a> or <a href="mailto:wojciechdavid@gmail.com">TheSensej</a>
