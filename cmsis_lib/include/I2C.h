@@ -3,10 +3,15 @@
 #ifndef I2C_H_
 #define I2C_H_
 
-void initI2C(void);
-void I2C_start(I2C_TypeDef* I2Cx, uint8_t address, uint8_t direction);
-void I2C_stop(I2C_TypeDef* I2Cx);
-void I2C_write(I2C_TypeDef* I2Cx, uint8_t data);
-uint8_t I2C_read(I2C_TypeDef* I2Cx, uint8_t ACK);
+void I2C_init(void);
+
+void I2C_start(void);
+void I2C_adres_write(uint8_t adres);
+void I2C_adres_read(uint8_t adres);
+void I2C_write(uint8_t data);
+uint8_t I2C_read(void);
+void I2C_stop(void);
+void I2C_wyslij(uint8_t rejestr, uint8_t wartosc);
+uint8_t I2C_czytaj(uint8_t rejestr);
 
 #endif
