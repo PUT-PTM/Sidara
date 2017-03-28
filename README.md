@@ -17,6 +17,15 @@ Optic sensor connection:<br/>
 &emsp;&emsp;GND -> GND<br/>
 &emsp;&emsp;VCC -> 3V<br/>
 
+SD Card Module connection:<br/>
+&emsp;&emsp;GND -> GND<br/>
+&emsp;&emsp;3V -> 3V3<br/>
+&emsp;&emsp;PB11 -> CS<br/>
+&emsp;&emsp;PB15 -> MOSI<br/>
+&emsp;&emsp;PB13 -> SCK<br/>
+&emsp;&emsp;PB14 -> MISO<br/>
+&emsp;&emsp;GND -> GND<br/>
+
 Idea, implementation and copyrights to:
 <ul>
   <li>Michał Sibera (Arebis)</li>
