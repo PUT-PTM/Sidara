@@ -20,42 +20,24 @@
 <folder appearance="1" expanded="2">
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
-<part id="1"/>
-<part id="2"/>
-<part id="3"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" path="C:/CooCox/CoIDE/workspace/PTM/main.c" title="main.c" tooltip="C:/CooCox/CoIDE/workspace/PTM/main.c" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" path="C:/Users/wojci/Desktop/Sidara/main.c" title="main.c" tooltip="C:/Users/wojci/Desktop/Sidara/main.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/PTM/main.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1417" selectionTopPixel="998"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="SPI.c" partName="SPI.c" path="C:/CooCox/CoIDE/workspace/PTM/cmsis_lib/source/SPI.c" title="SPI.c" tooltip="C:/CooCox/CoIDE/workspace/PTM/cmsis_lib/source/SPI.c" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/PTM/cmsis_lib/source/SPI.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="340" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="Timer.c" partName="Timer.c" path="C:/CooCox/CoIDE/workspace/PTM/cmsis_lib/source/Timer.c" title="Timer.c" tooltip="C:/CooCox/CoIDE/workspace/PTM/cmsis_lib/source/Timer.c" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/PTM/cmsis_lib/source/Timer.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="22" selectionOffset="2541" selectionTopPixel="1479"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="DAC.c" partName="DAC.c" path="C:/CooCox/CoIDE/workspace/PTM/cmsis_lib/source/DAC.c" title="DAC.c" tooltip="C:/CooCox/CoIDE/workspace/PTM/cmsis_lib/source/DAC.c" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/PTM/cmsis_lib/source/DAC.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1433" selectionTopPixel="204"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1173" selectionTopPixel="660"/>
 </editor>
 </editors>
 <views>
 <view id="org.coocox.builder.ui.views.ProjectView" partName="Project">
-<viewState CommonNavigator.LINKING_ENABLED="0" horizontalPosition="0" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0" verticalPosition="11">
+<viewState CommonNavigator.LINKING_ENABLED="0" horizontalPosition="0" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0" verticalPosition="0">
 <expanded>
 <element path="/PTM"/>
 <element path="/PTM/cmsis_lib"/>
 <element path="/PTM/cmsis_lib/include"/>
 <element path="/PTM/cmsis_lib/source"/>
 </expanded>
-<selection>
-<element path="/PTM/cmsis_lib/source/SPI.c"/>
-</selection>
 </viewState>
 </view>
 <view id="org.coocox.codebugger.trace.ui.traceview" partName="Semihosting">
@@ -103,7 +85,7 @@
 <fastViewBars>
 <fastViewBar fastViewLocation="1024" id="org.eclipse.ui.internal.ViewStack@fa2c30" orientation="256" selectedTabId="org.eclipse.ui.console.ConsoleView" style="0">
 <fastViews>
-<view id="org.eclipse.ui.console.ConsoleView" ratio="0.29888713"/>
+<view id="org.eclipse.ui.console.ConsoleView" ratio="0.2986185"/>
 </fastViews>
 </fastViewBar>
 </fastViewBars>
@@ -256,67 +238,14 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/PTM/cmsis_lib/source/ADC.c"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/PTM/cmsis_lib/source/Timer.c"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/PTM/cmsis_lib/source/DAC.c"/>
+<editor factoryID="org.coocox.component.ui.editors.repository.RepositoryElementFactory" id="org.coocox.builder.ui.editors.repository.RepositoryBrowser">
+<subPage/>
+</editor>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/PTM/cmsis_lib/source/SPI.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/PTM/spi_sd.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/PTM/cmsis_lib/include/SPI.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/PTM/cmsis_lib/include/SPI.c"/>
 </editors>
-<item historyLabel="DAC.c" index="2">
-<position info="not_deleted" x="1262" y="7"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="717" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="1358" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="1686" y="2"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="525" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="775" y="0"/>
-</item>
-<item historyLabel="DAC.c" index="2">
-<position info="not_deleted" x="1281" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="1265" y="0"/>
-</item>
-<item historyLabel="DAC.c" index="2">
-<position info="not_deleted" x="1281" y="0"/>
-</item>
-<item historyLabel="ADC.c" index="4">
-<position info="not_deleted" x="1557" y="0"/>
-</item>
-<item historyLabel="DAC.c" index="2">
-<position/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="639" y="0"/>
-</item>
-<item historyLabel="ADC.c" index="4">
-<position info="not_deleted" x="1557" y="0"/>
-</item>
-<item historyLabel="Timer.c" index="3">
-<position info="not_deleted" x="4424" y="0"/>
-</item>
-<item historyLabel="DAC.c" index="2">
-<position info="not_deleted" x="2379" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position/>
-</item>
-<item historyLabel="ADC.c" index="4">
-<position info="not_deleted" x="1557" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="876" y="0"/>
-</item>
-<item historyLabel="DAC.c" index="2">
-<position info="not_deleted" x="1636" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position/>
-</item>
 <item historyLabel="DAC.c" index="2">
 <position info="not_deleted" x="1636" y="0"/>
 </item>
@@ -404,8 +333,66 @@
 <item historyLabel="SPI.c" index="1">
 <position info="not_deleted" x="340" y="0"/>
 </item>
-<item active="true" historyLabel="main.c" index="0">
+<item historyLabel="main.c" index="0">
 <position info="not_deleted" x="1447" y="0"/>
+</item>
+<item historyLabel="Repository" index="7"/>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="1674" y="0"/>
+</item>
+<item historyLabel="SPI.c" index="8">
+<position/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="312" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="219" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="407" y="0"/>
+</item>
+<item historyLabel="spi_sd.c" index="9">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="407" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="403" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="388" y="0"/>
+</item>
+<item historyLabel="SPI.h" index="10">
+<position info="not_deleted" x="360" y="0"/>
+</item>
+<item historyLabel="SPI.c" index="8">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="SPI.h" index="10">
+<position info="not_deleted" x="268" y="0"/>
+</item>
+<item historyLabel="spi_sd.c" index="9">
+<position info="not_deleted" x="1148" y="0"/>
+</item>
+<item historyLabel="SPI.h" index="10">
+<position info="not_deleted" x="268" y="0"/>
+</item>
+<item historyLabel="SPI.c" index="8">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="SPI.h" index="10">
+<position info="not_deleted" x="268" y="0"/>
+</item>
+<item historyLabel="SPI.c" index="11">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="spi_sd.c" index="9">
+<position info="not_deleted" x="1148" y="0"/>
+</item>
+<item active="true" historyLabel="main.c" index="0">
+<position info="not_deleted" x="388" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -414,51 +401,51 @@
 <actionBarAdvisor/>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="DAC.c" tooltip="PTM/cmsis_lib/source/DAC.c">
-<persistable path="/PTM/cmsis_lib/source/DAC.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="Timer.c" tooltip="PTM/cmsis_lib/source/Timer.c">
-<persistable path="/PTM/cmsis_lib/source/Timer.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="SPI.c" tooltip="PTM/cmsis_lib/include/SPI.c">
+<persistable path="/PTM/cmsis_lib/include/SPI.c"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="SPI.c" tooltip="PTM/cmsis_lib/source/SPI.c">
 <persistable path="/PTM/cmsis_lib/source/SPI.c"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="ADC.c" tooltip="PTM/cmsis_lib/source/ADC.c">
-<persistable path="/PTM/cmsis_lib/source/ADC.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="SPI.h" tooltip="PTM/cmsis_lib/include/SPI.h">
+<persistable path="/PTM/cmsis_lib/include/SPI.h"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_usart.c" tooltip="PTM/cmsis_lib/source/stm32f4xx_usart.c">
-<persistable path="/PTM/cmsis_lib/source/stm32f4xx_usart.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="DAC.h" tooltip="PTM/cmsis_lib/include/DAC.h">
-<persistable path="/PTM/cmsis_lib/include/DAC.h"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="spi_sd.c" tooltip="PTM/spi_sd.c">
+<persistable path="/PTM/spi_sd.c"/>
 </file>
 <file factoryID="org.coocox.component.ui.editors.repository.RepositoryElementFactory" id="org.coocox.builder.ui.editors.repository.RepositoryBrowser" name="Repository" tooltip="Repository">
 <persistable>&#x0A;<subPage/>
 </persistable>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="ADC.h" tooltip="PTM/cmsis_lib/include/ADC.h">
-<persistable path="/PTM/cmsis_lib/include/ADC.h"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="ff.c" tooltip="PTM/ub_lib/fatfs/ff.c">
+<persistable path="/PTM/ub_lib/fatfs/ff.c"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="SPI.h" tooltip="PTM/cmsis_lib/include/SPI.h">
-<persistable path="/PTM/cmsis_lib/include/SPI.h"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="ff.h" tooltip="PTM/ub_lib/fatfs/ff.h">
+<persistable path="/PTM/ub_lib/fatfs/ff.h"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="USART.h" tooltip="PTM/cmsis_lib/include/USART.h">
-<persistable path="/PTM/cmsis_lib/include/USART.h"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="integer.h" tooltip="PTM/ub_lib/fatfs/integer.h">
+<persistable path="/PTM/ub_lib/fatfs/integer.h"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="USART.c" tooltip="PTM/cmsis_lib/source/USART.c">
-<persistable path="/PTM/cmsis_lib/source/USART.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="ffconf.h" tooltip="PTM/ub_lib/fatfs/ffconf.h">
+<persistable path="/PTM/ub_lib/fatfs/ffconf.h"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="startup_stm32f4xx.c" tooltip="PTM/cmsis_boot/startup/startup_stm32f4xx.c">
-<persistable path="/PTM/cmsis_boot/startup/startup_stm32f4xx.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="diskio.c" tooltip="PTM/ub_lib/fatfs/diskio.c">
+<persistable path="/PTM/ub_lib/fatfs/diskio.c"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="GPIO.c" tooltip="PTM/cmsis_lib/source/GPIO.c">
-<persistable path="/PTM/cmsis_lib/source/GPIO.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="diskio.h" tooltip="PTM/ub_lib/fatfs/diskio.h">
+<persistable path="/PTM/ub_lib/fatfs/diskio.h"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="PWM.c" tooltip="PTM/cmsis_lib/source/PWM.c">
-<persistable path="/PTM/cmsis_lib/source/PWM.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32_ub_fatfs.c" tooltip="PTM/ub_lib/stm32_ub_fatfs.c">
+<persistable path="/PTM/ub_lib/stm32_ub_fatfs.c"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="GPIO.h" tooltip="PTM/cmsis_lib/include/GPIO.h">
-<persistable path="/PTM/cmsis_lib/include/GPIO.h"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32_ub_fatfs.h" tooltip="PTM/ub_lib/stm32_ub_fatfs.h">
+<persistable path="/PTM/ub_lib/stm32_ub_fatfs.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32_ub_sdcard.h" tooltip="PTM/ub_lib/fatfs/lo_level_ub/stm32_ub_sdcard.h">
+<persistable path="/PTM/ub_lib/fatfs/lo_level_ub/stm32_ub_sdcard.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32_ub_sdcard.c" tooltip="PTM/ub_lib/fatfs/lo_level_ub/stm32_ub_sdcard.c">
+<persistable path="/PTM/ub_lib/fatfs/lo_level_ub/stm32_ub_sdcard.c"/>
 </file>
 </mruList>
 </workbench>
