@@ -171,6 +171,19 @@ void initTimer3_1HZ(void)
 	TIM_Cmd(TIM3, ENABLE);
 }
 
+void initTimer2For30msDelay()
+{
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2,ENABLE);
+
+	TIM_TimeBaseInitTypeDef str;
+	str.TIM_Period=999;
+	str.TIM_Prescaler=2799;
+	str.TIM_ClockDivision=TIM_CKD_DIV1;
+	str.TIM_CounterMode=TIM_CounterMode_Up;
+	TIM_TimeBaseInit(TIM2,&str);
+	TIM_Cmd(TIM2, DISABLE);
+}
+
 //void TIM2_IRQHandler(void)
 //{
 //	if(TIM_GetITStatus(TIM2,TIM_IT_Update) != RESET)
