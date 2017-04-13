@@ -19,6 +19,7 @@ void initTimer2Interrupt(void);
 void initTimer3_1HZ(void);
 
 void initTimer2For30msDelay();
+void delay30ms();
 
 //void TIM2_IRQHandler(void);
 

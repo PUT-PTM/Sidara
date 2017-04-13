@@ -98,14 +98,14 @@ typedef int bool;
 #define ON                      1
 
 /* Acceptable parameters for setMode */
-//#define POWER                   0
-//#define AMBIENT_LIGHT           1
-//#define PROXIMITY               2
-//#define WAIT                    3
-//#define AMBIENT_LIGHT_INT       4
-//#define PROXIMITY_INT           5
-//#define GESTURE                 6
-//#define ALL                     7
+#define POWER                   0
+#define AMBIENT_LIGHT           1
+#define PROXIMITY               2
+#define WAIT                    3
+#define AMBIENT_LIGHT_INT       4
+#define PROXIMITY_INT           5
+#define GESTURE                 6
+#define ALL                     7
 
 /* LED Drive values */
 #define LED_DRIVE_100MA         0
@@ -219,12 +219,30 @@ int gesture_far_count_;
 int gesture_state_;
 int gesture_motion_;
 
-void EnableGestureSensorInterrupt();
+void ConfigureGestureSensorInterruptPin();
 
-void EnableGestureSensor();
-//int ReadGesture();
-//bool isGestureAvailable();
-//bool readDataByte(uint8_t reg, uint8_t &val);
-//bool wireWriteByte(uint8_t val);
+//void EnableGestureSensor();
+int ReadGesture();
+bool isGestureAvailable();
+uint8_t getMode();
+bool setMode(uint8_t mode, uint8_t enable);
+bool init();
+
+void setGestureEnterThresh(uint8_t threshold);
+void setGestureExitThresh(uint8_t threshold);
+void setGestureGain(uint8_t gain);
+uint8_t getGestureLEDDrive();
+void setGestureLEDDrive(uint8_t drive);
+uint8_t getGestureWaitTime();
+bool setGestureWaitTime(uint8_t time);
+bool setGestureIntEnable(uint8_t enable);
+
+bool enableGestureSensor(bool interrupts);
+bool setLEDBoost(uint8_t boost);
+bool setGestureMode(uint8_t mode);
+bool enablePower();
+bool disablePower();
+void resetGestureParameters();
+
 
 #endif

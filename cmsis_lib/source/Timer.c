@@ -173,23 +173,21 @@ void initTimer3_1HZ(void)
 
 void initTimer2For30msDelay()
 {
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2,ENABLE);
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
 
 	TIM_TimeBaseInitTypeDef str;
 	str.TIM_Period=999;
-	str.TIM_Prescaler=2799;
+	str.TIM_Prescaler=2520;
 	str.TIM_ClockDivision=TIM_CKD_DIV1;
 	str.TIM_CounterMode=TIM_CounterMode_Up;
 	TIM_TimeBaseInit(TIM2,&str);
 	TIM_Cmd(TIM2, DISABLE);
 }
 
-//void TIM2_IRQHandler(void)
-//{
-//	if(TIM_GetITStatus(TIM2,TIM_IT_Update) != RESET)
-//	{
-//		GPIO_ToggleBits(GPIOD,GPIO_Pin_12 | GPIO_Pin_14);
-//
-//		TIM_ClearITPendingBit(TIM2,TIM_IT_Update);
-//	}
-//}
+/**
+ * must be configure with initTimer2For30msDelay()
+ */
+void delay30ms()
+{
+	TIM_Cmd(TIM2, ENABLE);
+}
