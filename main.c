@@ -37,6 +37,9 @@ uint8_t addrFE = 0;
 uint8_t addrFF = 0;
 uint8_t PA1 = 0;
 
+/* for debugging */
+int control_counter = 0;
+
 void readAllRegistersConnectedToGestures()
 {
 	addr80 = I2C_read_register(0x80);
@@ -74,14 +77,15 @@ void readAllRegistersConnectedToGestures()
 //    }
 //}
 
-void TIM2_IRQHandler(void)
-{
-	if(TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
-	{
-		TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
-		TIM_Cmd(TIM2, DISABLE);
-	}
-}
+//void TIM2_IRQHandler(void)
+//{
+//	if(TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
+//	{
+//		control_counter++;
+//		TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
+//		TIM_Cmd(TIM2, DISABLE);
+//	}
+//}
 
 //void EXTI1_IRQHandler(void)
 //{
@@ -111,18 +115,7 @@ int main(void)
 
 	while (1)
 	{
-		readAllRegistersConnectedToGestures();
-		GPIO_SetBits(GPIOD, GPIO_Pin_14);
-		delay30ms();
-		delay30ms();
-		delay30ms();
-		delay30ms();
-		delay30ms();
-		GPIO_ResetBits(GPIOD, GPIO_Pin_14);
-		delay30ms();
-		delay30ms();
-		delay30ms();
-		delay30ms();
-		delay30ms();
+//		readAllRegistersConnectedToGestures();
+		GPIO_ToggleBits(GPIOD, GPIO_Pin_14);
 	}
 }

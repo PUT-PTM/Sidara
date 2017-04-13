@@ -177,7 +177,7 @@ void initTimer2For30msDelay()
 
 	TIM_TimeBaseInitTypeDef str;
 	str.TIM_Period=999;
-	str.TIM_Prescaler=2520;
+	str.TIM_Prescaler=2519;
 	str.TIM_ClockDivision=TIM_CKD_DIV1;
 	str.TIM_CounterMode=TIM_CounterMode_Up;
 	TIM_TimeBaseInit(TIM2,&str);
@@ -185,9 +185,14 @@ void initTimer2For30msDelay()
 }
 
 /**
- * must be configure with initTimer2For30msDelay()
+ *
+ * must be configured with
+ * -> initTimer2For30msDelay();
  */
 void delay30ms()
 {
 	TIM_Cmd(TIM2, ENABLE);
+	while(TIM2->CNT < 999) {  }
+	TIM2->CNT = 0;
+	TIM_Cmd(TIM2, DISABLE);
 }

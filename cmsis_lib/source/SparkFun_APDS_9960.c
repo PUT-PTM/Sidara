@@ -66,20 +66,16 @@ void ConfigureGestureSensorInterruptPin()
 //    while(1) {
 //
 //        /* Wait some time to collect next batch of FIFO data */
-//        delay(FIFO_PAUSE_TIME);
+//        delay30ms();
 //
 //        /* Get the contents of the STATUS register. Is data still valid? */
-//        if( !wireReadDataByte(APDS9960_GSTATUS, gstatus) ) {
-//            return ERROR;
-//        }
+//        gstatus = I2C_read_register(APDS9960_GSTATUS);
 //
 //        /* If we have valid data, read in FIFO */
 //        if( (gstatus & APDS9960_GVALID) == APDS9960_GVALID ) {
 //
 //            /* Read the current FIFO level */
-//            if( !wireReadDataByte(APDS9960_GFLVL, fifo_level) ) {
-//                return ERROR;
-//            }
+//        	fifo_level = I2C_read_register(APDS9960_GFLVL);
 //
 //            /* If there's stuff in the FIFO, read it into our data block */
 //            if( fifo_level > 0) {
@@ -616,3 +612,33 @@ void resetGestureParameters()
     gesture_state_ = 0;
     gesture_motion_ = DIR_NONE;
 }
+
+///**
+// * @brief Reads a block (array) of bytes from the I2C device and register
+// * Revritten?
+// * @param[in] reg the register to read from
+// * @param[out] val pointer to the beginning of the data
+// * @param[in] len number of bytes to read
+// * @return Number of bytes read. -1 on read error.
+// */
+//int wireReadDataBlock(uint8_t reg, uint8_t *val, unsigned int len)
+//{
+//    unsigned char i = 0;
+//
+//    /* Indicate which register we want to read from */
+//    if (!wireWriteByte(reg)) {
+//        return -1;
+//    }
+//
+//    /* Read block data */
+//    Wire.requestFrom(APDS9960_I2C_ADDR, len);
+//    while (Wire.available()) {
+//        if (i >= len) {
+//            return -1;
+//        }
+//        val[i] = Wire.read();
+//        i++;
+//    }
+//
+//    return i;
+//}
