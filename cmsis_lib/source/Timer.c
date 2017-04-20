@@ -171,17 +171,17 @@ void initTimer3_1HZ(void)
 	TIM_Cmd(TIM3, ENABLE);
 }
 
-void initTimer2For30msDelay()
+void initTimer5For30msDelay()
 {
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, ENABLE);
 
 	TIM_TimeBaseInitTypeDef str;
 	str.TIM_Period=999;
 	str.TIM_Prescaler=2519;
 	str.TIM_ClockDivision=TIM_CKD_DIV1;
 	str.TIM_CounterMode=TIM_CounterMode_Up;
-	TIM_TimeBaseInit(TIM2,&str);
-	TIM_Cmd(TIM2, DISABLE);
+	TIM_TimeBaseInit(TIM5,&str);
+	TIM_Cmd(TIM5, DISABLE);
 }
 
 /**
@@ -191,8 +191,8 @@ void initTimer2For30msDelay()
  */
 void delay30ms()
 {
-	TIM_Cmd(TIM2, ENABLE);
-	while(TIM2->CNT < 999) {  }
-	TIM2->CNT = 0;
-	TIM_Cmd(TIM2, DISABLE);
+	TIM_Cmd(TIM5, ENABLE);
+	while(TIM5->CNT < 999) {  }
+	TIM5->CNT = 0;
+	TIM_Cmd(TIM5, DISABLE);
 }

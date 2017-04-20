@@ -77,16 +77,6 @@ void readAllRegistersConnectedToGestures()
 //    }
 //}
 
-//void TIM2_IRQHandler(void)
-//{
-//	if(TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
-//	{
-//		control_counter++;
-//		TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
-//		TIM_Cmd(TIM2, DISABLE);
-//	}
-//}
-
 //void EXTI1_IRQHandler(void)
 //{
 //	if(EXTI_GetITStatus(EXTI_Line1) != RESET)
@@ -106,7 +96,7 @@ int main(void)
 	initGPIODiodes();
 
 	enableGestureSensor(TRUE);
-	initTimer2For30msDelay();
+	initTimer5For30msDelay();
 
 	initNVICForEXTI1();
 	ConfigureGestureSensorInterruptPin();
@@ -115,7 +105,6 @@ int main(void)
 
 	while (1)
 	{
-//		readAllRegistersConnectedToGestures();
-		GPIO_ToggleBits(GPIOD, GPIO_Pin_14);
+		readAllRegistersConnectedToGestures();
 	}
 }

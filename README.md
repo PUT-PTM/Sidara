@@ -15,7 +15,8 @@ Optic sensor connection:<br/>
 &emsp;&emsp;PB6 -> SCL<br/>
 &emsp;&emsp;PB7 -> SDA<br/>
 &emsp;&emsp;GND -> GND<br/>
-&emsp;&emsp;VCC -> 3V<br/>
+&emsp;&emsp;3V  -> VCC<br/>
+&emsp;&emsp;PA0 -> INT<br/>
 
 SD Card Module connection:<br/>
 &emsp;&emsp;GND -> GND<br/>

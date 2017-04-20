@@ -32,7 +32,7 @@
 
 void ConfigureGestureSensorInterruptPin()
 {
-	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE);
 
 	GPIO_InitTypeDef  str;
 	str.GPIO_Pin = GPIO_Pin_1;
@@ -40,7 +40,7 @@ void ConfigureGestureSensorInterruptPin()
 	str.GPIO_OType = GPIO_OType_OD;
 	str.GPIO_Speed = GPIO_Speed_50MHz;
 	str.GPIO_PuPd = GPIO_PuPd_UP;
-	GPIO_Init(GPIOA, &str);
+	GPIO_Init(GPIOB, &str);
 }
 
 ///**
