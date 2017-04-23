@@ -37,6 +37,9 @@ uint8_t addrFE = 0;
 uint8_t addrFF = 0;
 uint8_t PA1 = 0;
 
+bool gestureAvailable = 0;
+int gesture = 0;
+
 /* for debugging */
 int control_counter = 0;
 
@@ -95,7 +98,8 @@ int main(void)
 	I2C_init();
 	initGPIODiodes();
 
-	enableGestureSensor(TRUE);
+//	enableGestureSensor(TRUE);
+	EnableGestureSensor();
 	initTimer5For30msDelay();
 
 	initNVICForEXTI1();
@@ -106,5 +110,85 @@ int main(void)
 	while (1)
 	{
 		readAllRegistersConnectedToGestures();
+
+		gestureAvailable = isGestureAvailable();
+
+	    if (gestureAvailable)
+	    {
+	    	gesture = readGesture();
+
+			switch (gesture)
+			{
+			  case DIR_UP:
+				GPIO_SetBits(GPIOD, GPIO_Pin_13);
+				break;
+			  case DIR_DOWN:
+				  GPIO_SetBits(GPIOD, GPIO_Pin_15);
+				break;
+			  case DIR_LEFT:
+				  GPIO_SetBits(GPIOD, GPIO_Pin_12);
+				break;
+			  case DIR_RIGHT:
+				  GPIO_SetBits(GPIOD, GPIO_Pin_14);
+				break;
+			  default:
+				break;
+
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  delay30ms();
+			  GPIO_ResetBits(GPIOD, GPIO_Pin_12);
+			  GPIO_ResetBits(GPIOD, GPIO_Pin_13);
+			  GPIO_ResetBits(GPIOD, GPIO_Pin_14);
+			  GPIO_ResetBits(GPIOD, GPIO_Pin_15);
+			}
+	    }
 	}
 }

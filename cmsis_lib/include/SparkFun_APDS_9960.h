@@ -221,7 +221,7 @@ int gesture_motion_;
 
 void ConfigureGestureSensorInterruptPin();
 
-//void EnableGestureSensor();
+void EnableGestureSensor();
 int ReadGesture();
 bool isGestureAvailable();
 uint8_t getMode();

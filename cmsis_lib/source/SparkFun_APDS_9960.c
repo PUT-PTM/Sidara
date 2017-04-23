@@ -8,27 +8,28 @@
 #include "stm32f4xx_syscfg.h"
 #include "stm32f4xx_exti.h"
 #include "misc.h"
+#include <math.h>
 
 
-//void EnableGestureSensor()
-//{
-//	//Power on device
-//	uint8_t receivedRegisterValue = I2C_read_register(0x80);
-//	uint8_t valueToEnableDevice = 0x1;
-//	I2C_write_register(0x80, receivedRegisterValue | valueToEnableDevice);
-//
-//	//Enable gestures
-//	receivedRegisterValue = I2C_read_register(0x80);
-//	valueToEnableDevice = 0x64;
-//	I2C_write_register(0x80, receivedRegisterValue | valueToEnableDevice);
-//
-//	//Enable gesture interruption
-//	receivedRegisterValue = I2C_read_register(0xAB);
-//	valueToEnableDevice = 0x2;
-//	I2C_write_register(0xAB, receivedRegisterValue | valueToEnableDevice);
-//
-//	initTimer2For30msDelay();
-//}
+void EnableGestureSensor()
+{
+	//Power on device
+	uint8_t receivedRegisterValue = I2C_read_register(0x80);
+	uint8_t valueToEnableDevice = 0x1;
+	I2C_write_register(0x80, receivedRegisterValue | valueToEnableDevice);
+
+	//Enable gestures
+	receivedRegisterValue = I2C_read_register(0x80);
+	uint8_t valueToEnableGestures = 0x64;
+	I2C_write_register(0x80, receivedRegisterValue | valueToEnableGestures);
+
+	//Enable gesture interruption
+	receivedRegisterValue = I2C_read_register(0xAB);
+	uint8_t valueToEnableDeviceInterrupt = 0x2;
+	I2C_write_register(0xAB, receivedRegisterValue | valueToEnableDeviceInterrupt);
+
+	initTimer5For30msDelay();
+}
 
 void ConfigureGestureSensorInterruptPin()
 {
@@ -43,88 +44,122 @@ void ConfigureGestureSensorInterruptPin()
 	GPIO_Init(GPIOB, &str);
 }
 
-///**
-// * @brief Processes a gesture event and returns best guessed gesture
-// *
-// * @return Number corresponding to gesture. -1 on error.
-// */
-//int ReadGesture()
-//{
-//    uint8_t fifo_level = 0;
-//    uint8_t bytes_read = 0;
-//    uint8_t fifo_data[128];
-//    uint8_t gstatus;
-//    int motion;
-//    int i;
-//
-//    /* Make sure that power and gesture is on and data is valid */
-//    if( !isGestureAvailable() || !(getMode() & 0b01000001) ) {
-//        return DIR_NONE;
+/**
+ * @brief Reads a block (array) of bytes from the I2C device and register
+ * Revritten?
+ * @param[in] reg the register to read from
+ * @param[out] val pointer to the beginning of the data
+ * @param[in] len number of bytes to read
+ * @return Number of bytes read. -1 on read error.
+ */
+int wireReadDataBlock(uint8_t reg, uint8_t *val, unsigned int len)
+{
+    unsigned char i = 0;
+
+//    /* Indicate which register we want to read from */
+//    if (!wireWriteByte(reg)) {
+//        return -1;
 //    }
-//
-//    /* Keep looping as long as gesture data is valid */
-//    while(1) {
-//
-//        /* Wait some time to collect next batch of FIFO data */
-//        delay30ms();
-//
-//        /* Get the contents of the STATUS register. Is data still valid? */
-//        gstatus = I2C_read_register(APDS9960_GSTATUS);
-//
-//        /* If we have valid data, read in FIFO */
-//        if( (gstatus & APDS9960_GVALID) == APDS9960_GVALID ) {
-//
-//            /* Read the current FIFO level */
-//        	fifo_level = I2C_read_register(APDS9960_GFLVL);
-//
-//            /* If there's stuff in the FIFO, read it into our data block */
-//            if( fifo_level > 0) {
-//                bytes_read = wireReadDataBlock(  APDS9960_GFIFO_U,
-//                                                (uint8_t*)fifo_data,
-//                                                (fifo_level * 4) );
-//                if( bytes_read == -1 ) {
-//                    return ERROR;
-//                }
-//
-//                /* If at least 1 set of data, sort the data into U/D/L/R */
-//                if( bytes_read >= 4 ) {
-//                    for( i = 0; i < bytes_read; i += 4 ) {
-//                        gesture_data_.u_data[gesture_data_.index] = \
-//                                                            fifo_data[i + 0];
-//                        gesture_data_.d_data[gesture_data_.index] = \
-//                                                            fifo_data[i + 1];
-//                        gesture_data_.l_data[gesture_data_.index] = \
-//                                                            fifo_data[i + 2];
-//                        gesture_data_.r_data[gesture_data_.index] = \
-//                                                            fifo_data[i + 3];
-//                        gesture_data_.index++;
-//                        gesture_data_.total_gestures++;
-//                    }
-//
-//                    /* Filter and process gesture data. Decode near/far state */
-//                    if( processGestureData() ) {
-//                        if( decodeGesture() ) {
-////                            //***TODO: U-Turn Gestures
-//                        }
-//                    }
-//
-//                    /* Reset data */
-//                    gesture_data_.index = 0;
-//                    gesture_data_.total_gestures = 0;
-//                }
-//            }
-//        } else {
-//
-//            /* Determine best guessed gesture and clean up */
-//            delay(FIFO_PAUSE_TIME);
-//            decodeGesture();
-//            motion = gesture_motion_;
-//
-//            resetGestureParameters();
-//            return motion;
-//        }
-//    }
-//}
+
+//    /* Read block data */
+//    Wire.requestFrom(APDS9960_I2C_ADDR, len);
+    uint8_t value = I2C_read_register(reg);
+
+    while (value != 0)
+    {
+        if (i >= len)
+            return -1;
+
+        val[i] = value;
+        i++;
+        value = I2C_read_register(reg);
+    }
+
+    return i;
+}
+
+/**
+ * @brief Processes a gesture event and returns best guessed gesture
+ *
+ * @return Number corresponding to gesture. -1 on error.
+ */
+int readGesture()
+{
+    uint8_t fifo_level = 0;
+    uint8_t bytes_read = 0;
+    uint8_t fifo_data[128];
+    uint8_t gstatus;
+    int motion;
+    int i;
+
+    /* Make sure that power and gesture is on and data is valid */
+    if( !isGestureAvailable() || !(getMode() & 0b01000001) ) {
+        return DIR_NONE;
+    }
+
+    /* Keep looping as long as gesture data is valid */
+    while(1) {
+
+        /* Wait some time to collect next batch of FIFO data */
+        delay30ms();
+
+        /* Get the contents of the STATUS register. Is data still valid? */
+        gstatus = I2C_read_register(APDS9960_GSTATUS);
+
+        /* If we have valid data, read in FIFO */
+        if( (gstatus & APDS9960_GVALID) == APDS9960_GVALID ) {
+
+            /* Read the current FIFO level */
+        	fifo_level = I2C_read_register(APDS9960_GFLVL);
+
+            /* If there's stuff in the FIFO, read it into our data block */
+            if( fifo_level > 0) {
+                bytes_read = wireReadDataBlock(  APDS9960_GFIFO_U,
+                                                (uint8_t*)fifo_data,
+                                                (fifo_level * 4) );
+                if( bytes_read == -1 ) {
+                    return ERROR;
+                }
+
+                /* If at least 1 set of data, sort the data into U/D/L/R */
+                if( bytes_read >= 4 ) {
+                    for( i = 0; i < bytes_read; i += 4 ) {
+                        gesture_data_.u_data[gesture_data_.index] = \
+                                                            fifo_data[i + 0];
+                        gesture_data_.d_data[gesture_data_.index] = \
+                                                            fifo_data[i + 1];
+                        gesture_data_.l_data[gesture_data_.index] = \
+                                                            fifo_data[i + 2];
+                        gesture_data_.r_data[gesture_data_.index] = \
+                                                            fifo_data[i + 3];
+                        gesture_data_.index++;
+                        gesture_data_.total_gestures++;
+                    }
+
+                    /* Filter and process gesture data. Decode near/far state */
+                    if( processGestureData() ) {
+                        if( decodeGesture() ) {
+//                            //***TODO: U-Turn Gestures
+                        }
+                    }
+
+                    /* Reset data */
+                    gesture_data_.index = 0;
+                    gesture_data_.total_gestures = 0;
+                }
+            }
+        } else {
+
+            /* Determine best guessed gesture and clean up */
+            delay30ms();
+            decodeGesture();
+            motion = gesture_motion_;
+
+            resetGestureParameters();
+            return motion;
+        }
+    }
+}
 
 /**
  * Rewritten
@@ -613,32 +648,201 @@ void resetGestureParameters()
     gesture_motion_ = DIR_NONE;
 }
 
-///**
-// * @brief Reads a block (array) of bytes from the I2C device and register
-// * Revritten?
-// * @param[in] reg the register to read from
-// * @param[out] val pointer to the beginning of the data
-// * @param[in] len number of bytes to read
-// * @return Number of bytes read. -1 on read error.
-// */
-//int wireReadDataBlock(uint8_t reg, uint8_t *val, unsigned int len)
-//{
-//    unsigned char i = 0;
-//
-//    /* Indicate which register we want to read from */
-//    if (!wireWriteByte(reg)) {
-//        return -1;
-//    }
-//
-//    /* Read block data */
-//    Wire.requestFrom(APDS9960_I2C_ADDR, len);
-//    while (Wire.available()) {
-//        if (i >= len) {
-//            return -1;
-//        }
-//        val[i] = Wire.read();
-//        i++;
-//    }
-//
-//    return i;
-//}
+
+/**
+ * @brief Processes the raw gesture data to determine swipe direction
+ *
+ * @return True if near or far state seen. False otherwise.
+ */
+bool processGestureData()
+{
+    uint8_t u_first = 0;
+    uint8_t d_first = 0;
+    uint8_t l_first = 0;
+    uint8_t r_first = 0;
+    uint8_t u_last = 0;
+    uint8_t d_last = 0;
+    uint8_t l_last = 0;
+    uint8_t r_last = 0;
+    int ud_ratio_first;
+    int lr_ratio_first;
+    int ud_ratio_last;
+    int lr_ratio_last;
+    int ud_delta;
+    int lr_delta;
+    int i;
+
+    /* If we have less than 4 total gestures, that's not enough */
+    if( gesture_data_.total_gestures <= 4 ) {
+        return FALSE;
+    }
+
+    /* Check to make sure our data isn't out of bounds */
+    if( (gesture_data_.total_gestures <= 32) && \
+        (gesture_data_.total_gestures > 0) ) {
+
+        /* Find the first value in U/D/L/R above the threshold */
+        for( i = 0; i < gesture_data_.total_gestures; i++ ) {
+            if( (gesture_data_.u_data[i] > GESTURE_THRESHOLD_OUT) &&
+                (gesture_data_.d_data[i] > GESTURE_THRESHOLD_OUT) &&
+                (gesture_data_.l_data[i] > GESTURE_THRESHOLD_OUT) &&
+                (gesture_data_.r_data[i] > GESTURE_THRESHOLD_OUT) ) {
+
+                u_first = gesture_data_.u_data[i];
+                d_first = gesture_data_.d_data[i];
+                l_first = gesture_data_.l_data[i];
+                r_first = gesture_data_.r_data[i];
+                break;
+            }
+        }
+
+        /* If one of the _first values is 0, then there is no good data */
+        if( (u_first == 0) || (d_first == 0) || \
+            (l_first == 0) || (r_first == 0) ) {
+
+            return FALSE;
+        }
+        /* Find the last value in U/D/L/R above the threshold */
+        for( i = gesture_data_.total_gestures - 1; i >= 0; i-- )
+        {
+            if( (gesture_data_.u_data[i] > GESTURE_THRESHOLD_OUT) &&
+                (gesture_data_.d_data[i] > GESTURE_THRESHOLD_OUT) &&
+                (gesture_data_.l_data[i] > GESTURE_THRESHOLD_OUT) &&
+                (gesture_data_.r_data[i] > GESTURE_THRESHOLD_OUT) ) {
+
+                u_last = gesture_data_.u_data[i];
+                d_last = gesture_data_.d_data[i];
+                l_last = gesture_data_.l_data[i];
+                r_last = gesture_data_.r_data[i];
+                break;
+            }
+        }
+    }
+
+    /* Calculate the first vs. last ratio of up/down and left/right */
+    ud_ratio_first = ((u_first - d_first) * 100) / (u_first + d_first);
+    lr_ratio_first = ((l_first - r_first) * 100) / (l_first + r_first);
+    ud_ratio_last = ((u_last - d_last) * 100) / (u_last + d_last);
+    lr_ratio_last = ((l_last - r_last) * 100) / (l_last + r_last);
+
+    /* Determine the difference between the first and last ratios */
+    ud_delta = ud_ratio_last - ud_ratio_first;
+    lr_delta = lr_ratio_last - lr_ratio_first;
+
+    /* Accumulate the UD and LR delta values */
+    gesture_ud_delta_ += ud_delta;
+    gesture_lr_delta_ += lr_delta;
+
+    /* Determine U/D gesture */
+    if( gesture_ud_delta_ >= GESTURE_SENSITIVITY_1 ) {
+        gesture_ud_count_ = 1;
+    } else if( gesture_ud_delta_ <= -GESTURE_SENSITIVITY_1 ) {
+        gesture_ud_count_ = -1;
+    } else {
+        gesture_ud_count_ = 0;
+    }
+
+    /* Determine L/R gesture */
+    if( gesture_lr_delta_ >= GESTURE_SENSITIVITY_1 ) {
+        gesture_lr_count_ = 1;
+    } else if( gesture_lr_delta_ <= -GESTURE_SENSITIVITY_1 ) {
+        gesture_lr_count_ = -1;
+    } else {
+        gesture_lr_count_ = 0;
+    }
+
+    /* Determine Near/Far gesture */
+    if( (gesture_ud_count_ == 0) && (gesture_lr_count_ == 0) ) {
+        if( (abs(ud_delta) < GESTURE_SENSITIVITY_2) && \
+            (abs(lr_delta) < GESTURE_SENSITIVITY_2) ) {
+
+            if( (ud_delta == 0) && (lr_delta == 0) ) {
+                gesture_near_count_++;
+            } else if( (ud_delta != 0) || (lr_delta != 0) ) {
+                gesture_far_count_++;
+            }
+
+            if( (gesture_near_count_ >= 10) && (gesture_far_count_ >= 2) ) {
+                if( (ud_delta == 0) && (lr_delta == 0) ) {
+                    gesture_state_ = NEAR_STATE;
+                } else if( (ud_delta != 0) && (lr_delta != 0) ) {
+                    gesture_state_ = FAR_STATE;
+                }
+                return TRUE;
+            }
+        }
+    } else {
+        if( (abs(ud_delta) < GESTURE_SENSITIVITY_2) && \
+            (abs(lr_delta) < GESTURE_SENSITIVITY_2) ) {
+
+            if( (ud_delta == 0) && (lr_delta == 0) ) {
+                gesture_near_count_++;
+            }
+
+            if( gesture_near_count_ >= 10 ) {
+                gesture_ud_count_ = 0;
+                gesture_lr_count_ = 0;
+                gesture_ud_delta_ = 0;
+                gesture_lr_delta_ = 0;
+            }
+        }
+    }
+
+    return FALSE;
+}
+
+/**
+ * @brief Determines swipe direction or near/far state
+ * Revritten
+ * @return True if near/far event. False otherwise.
+ */
+bool decodeGesture()
+{
+    /* Return if near or far event is detected */
+    if( gesture_state_ == NEAR_STATE ) {
+        gesture_motion_ = DIR_NEAR;
+        return TRUE;
+    } else if ( gesture_state_ == FAR_STATE ) {
+        gesture_motion_ = DIR_FAR;
+        return TRUE;
+    }
+
+    /* Determine swipe direction */
+    if( (gesture_ud_count_ == -1) && (gesture_lr_count_ == 0) ) {
+        gesture_motion_ = DIR_UP;
+    } else if( (gesture_ud_count_ == 1) && (gesture_lr_count_ == 0) ) {
+        gesture_motion_ = DIR_DOWN;
+    } else if( (gesture_ud_count_ == 0) && (gesture_lr_count_ == 1) ) {
+        gesture_motion_ = DIR_RIGHT;
+    } else if( (gesture_ud_count_ == 0) && (gesture_lr_count_ == -1) ) {
+        gesture_motion_ = DIR_LEFT;
+    } else if( (gesture_ud_count_ == -1) && (gesture_lr_count_ == 1) ) {
+        if( fabs(gesture_ud_delta_) > fabs(gesture_lr_delta_) ) {
+            gesture_motion_ = DIR_UP;
+        } else {
+            gesture_motion_ = DIR_RIGHT;
+        }
+    } else if( (gesture_ud_count_ == 1) && (gesture_lr_count_ == -1) ) {
+        if( fabs(gesture_ud_delta_) > fabs(gesture_lr_delta_) ) {
+            gesture_motion_ = DIR_DOWN;
+        } else {
+            gesture_motion_ = DIR_LEFT;
+        }
+    } else if( (gesture_ud_count_ == -1) && (gesture_lr_count_ == -1) ) {
+        if( fabs(gesture_ud_delta_) > fabs(gesture_lr_delta_) ) {
+            gesture_motion_ = DIR_UP;
+        } else {
+            gesture_motion_ = DIR_LEFT;
+        }
+    } else if( (gesture_ud_count_ == 1) && (gesture_lr_count_ == 1) ) {
+        if( fabs(gesture_ud_delta_) > fabs(gesture_lr_delta_) ) {
+            gesture_motion_ = DIR_DOWN;
+        } else {
+            gesture_motion_ = DIR_RIGHT;
+        }
+    } else {
+        return FALSE;
+    }
+
+    return TRUE;
+}
