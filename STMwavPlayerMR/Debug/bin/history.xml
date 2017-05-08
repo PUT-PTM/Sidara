@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -g -nostartfiles -Map=STMwavPlayerMR.map -O0 --gc-sections -LD:\CooCox\CoIDE\configuration\ProgramData\STMwavPlayerMR -TD:\CooCox\CoIDE\configuration\ProgramData\STMwavPlayerMR/arm-gcc-link.ld -g">
+      <target file="STMwavPlayerMR.elf" lastModified="15ba349871d">
+         <source file="..\obj\stm32f4xx_syscfg.o" lastModified="15ba349756e"/>
+         <source file="..\obj\delay.o" lastModified="15ba34975e8"/>
+         <source file="..\obj\startup_stm32f4xx.o" lastModified="15ba349765c"/>
+         <source file="..\obj\main.o" lastModified="15ba34978b6"/>
+         <source file="..\obj\stm32f4xx_rcc.o" lastModified="15ba3497958"/>
+         <source file="..\obj\codec.o" lastModified="15ba3497aaa"/>
+         <source file="..\obj\stm32f4xx_adc.o" lastModified="15ba3497b5e"/>
+         <source file="..\obj\List.o" lastModified="15ba3497be6"/>
+         <source file="..\obj\spi_sd.o" lastModified="15ba3497ccd"/>
+         <source file="..\obj\stm32f4xx_gpio.o" lastModified="15ba3497d66"/>
+         <source file="..\obj\system_stm32f4xx.o" lastModified="15ba3497dea"/>
+         <source file="..\obj\syscalls.o" lastModified="15ba3497e7d"/>
+         <source file="..\obj\stm32f4xx_dma.o" lastModified="15ba3497f06"/>
+         <source file="..\obj\ff.o" lastModified="15ba3497fdf"/>
+         <source file="..\obj\stm32f4xx_spi.o" lastModified="15ba3498078"/>
+         <source file="..\obj\stm32f4xx_i2c.o" lastModified="15ba349810b"/>
+         <source file="..\obj\stm32f4xx_rng.o" lastModified="15ba349817e"/>
+         <source file="..\obj\stm32f4xx_exti.o" lastModified="15ba3498208"/>
+         <source file="..\obj\misc.o" lastModified="15ba349827c"/>
+         <source file="..\obj\stm32f4xx_rtc.o" lastModified="15ba3498354"/>
+         <source file="..\obj\stm32f4xx_tim.o" lastModified="15ba349842c"/>
+         <source file="..\obj\tm_stm32f4_pcd8544.o" lastModified="15ba34984c5"/>
+      </target>
+   </processor>
+</history>

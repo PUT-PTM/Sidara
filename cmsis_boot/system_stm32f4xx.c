@@ -146,7 +146,7 @@
 
 /************************* PLL Parameters *************************************/
 /* PLL_VCO = (HSE_VALUE or HSI_VALUE / PLL_M) * PLL_N */
-#define PLL_M      8
+#define PLL_M      7
 #define PLL_N      336
 
 /* SYSCLK = PLL_VCO / PLL_P */
@@ -549,3 +549,4 @@ void SystemInit_ExtMemCtl(void)
   * @}
   */    
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
+

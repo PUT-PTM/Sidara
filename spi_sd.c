@@ -6,9 +6,12 @@
 /*-----------------------------------------------------------------------*/
 
 //najwazniejsze funkcje i procedury do obslugi karty
-
+#include "stm32f4xx.h"
 #include "diskio.h"
+#include "delay.h"
+#include "stm32f4xx_rcc.h"
 #include "stm32f4xx_gpio.h"
+#include "stm32f4xx_spi.h"
 
 /* Definitions for MMC/SDC command */
 #define CMD0     (0x40+0)     /* GO_IDLE_STATE */
@@ -48,15 +51,72 @@ static
 BYTE PowerFlag = 0;     		/* indicates if "power" is on */
 
 static
-void SELECT (void) 	// CS w stan niski
+void SELECT (void) 				// CS w stan niski
 {
-  GPIO_ResetBits(GPIOB, GPIO_Pin_11);
+	GPIOB->BSRRH |= GPIO_BSRR_BS_11;
 }
 
 static
-void DESELECT (void) 		// CS w stan wysoki
+void DESELECT (void) 			// CS w stan wysoki
 {
-  GPIO_SetBits(GPIOB, GPIO_Pin_11);
+	GPIOB->BSRRL |= GPIO_BSRR_BS_11;
+}
+
+void SPI_SD_Init( void )
+{
+    RCC->AHB1ENR |= RCC_AHB1ENR_GPIOBEN;
+    RCC->APB1ENR |= RCC_APB1ENR_SPI2EN;
+
+
+
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_SPI2, ENABLE); //taktowanie dla SPI2
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB,ENABLE); //taktowanie dla B
+
+	// GPIOB - PB11( CS ) to na pewno dziala
+		GPIOB->MODER |= GPIO_MODER_MODER11_0;
+		GPIOB->OSPEEDR |= GPIO_OSPEEDER_OSPEEDR11;
+
+		//*************************************************************
+		//							SCK, MISO, MOSI
+		//Serial Clock, sluzy do przesylania sygnalu zegarowego
+		//*************************************************************
+		GPIO_InitTypeDef GPIO_InitStructure;
+		//Wybor tak zwanych "alternative function" dla wyprowadzen GPIO:
+		GPIO_PinAFConfig(GPIOB, GPIO_PinSource13, GPIO_AF_SPI2);
+		GPIO_PinAFConfig(GPIOB, GPIO_PinSource14, GPIO_AF_SPI2);
+		GPIO_PinAFConfig(GPIOB, GPIO_PinSource15, GPIO_AF_SPI2);
+
+		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15;
+		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+		GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+		GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
+		GPIO_Init(GPIOB, &GPIO_InitStructure);
+
+		//*************************************************************
+		//							SPI
+		//*************************************************************
+		SPI_InitTypeDef SPI_InitStructure;
+
+		SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;	//transmisja z wykorzystaniem jednej linii, transmisja jednokierunkowa
+		SPI_InitStructure.SPI_Mode = SPI_Mode_Master;						//tryb pracy SPI
+		SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b;					//8-bit ramka danych
+		SPI_InitStructure.SPI_CPOL = SPI_CPOL_High;							//stan sygnalu taktujacego przy braku transmisji - wysoki
+		SPI_InitStructure.SPI_CPHA = SPI_CPHA_2Edge;						//aktywne zbocze sygnalu taktujacego - 2-gie zbocze
+		SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;							//programowa obsluga linii NSS (CS)
+		SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4; 	//prescaler szybkosci tansmisji  72MHz/4=18MHz
+		SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;					//pierwszy bit w danych najbardziej znaczacy
+		SPI_InitStructure.SPI_CRCPolynomial = 7;							//stopien wielomianu do obliczania sumy CRC
+		SPI_Init(SPI2, &SPI_InitStructure);									//inicjalizacja SPI
+
+		SPI_CalculateCRC(SPI2, DISABLE);
+		SPI_Cmd(SPI2, ENABLE);					// Wlacz SPI2
+
+		RCC->APB1RSTR |= RCC_APB1RSTR_SPI2RST;
+	    delay_ms( 10 );
+	    RCC->APB1RSTR &= ~RCC_APB1RSTR_SPI2RST;
+
+
+	DESELECT(); //ustawienie CS na 1, w stan wysoki
 }
 
 static
@@ -334,7 +394,7 @@ DRESULT disk_read (
     BYTE drv,            /* Physical drive nmuber (0) */
     BYTE *buff,            /* Pointer to the data buffer to store read data */
     DWORD sector,        /* Start sector number (LBA) */
-    UINT count            /* Sector count (1..255) */
+    BYTE count            /* Sector count (1..255) */
 )
 {
     if (drv || !count) return RES_PARERR;
@@ -374,7 +434,7 @@ DRESULT disk_write (
     BYTE drv,            /* Physical drive nmuber (0) */
     const BYTE *buff,    /* Pointer to the data to be written */
     DWORD sector,        /* Start sector number (LBA) */
-    UINT count            /* Sector count (1..255) */
+    BYTE count            /* Sector count (1..255) */
 )
 {
     if (drv || !count) return RES_PARERR;
@@ -545,7 +605,7 @@ void disk_timerproc (void)
 DWORD get_fattime (void)
 {
 
-    return  ((2017UL-1980) << 25)    // Year = 2016
+    return  ((2016UL-1980) << 25)    // Year = 2016
             | (3UL << 21)            // Month = March
             | (1UL << 16)            // Day = 1
             | (12U << 11)            // Hour = 12
