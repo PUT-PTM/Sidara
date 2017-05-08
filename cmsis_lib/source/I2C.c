@@ -93,3 +93,22 @@ uint8_t I2C_read_register(uint8_t register_to_read)
 	I2C_stop();
 	return v;
 }
+
+FlagStatus I2C_read_register_flag(uint8_t register_to_read, uint32_t I2C_FLAG)
+{
+	uint8_t v;
+	I2C_start();
+
+	I2C_adress_write(LSM_ADRES);
+
+	I2C_write(register_to_read);
+	I2C_start();
+	I2C_AcknowledgeConfig(I2C1,ENABLE);
+	I2C_adress_read(LSM_ADRES);
+
+	v = I2C_GetFlagStatus(I2C1, I2C_FLAG);
+
+	I2C_AcknowledgeConfig(I2C1,DISABLE);
+	I2C_stop();
+	return v;
+}

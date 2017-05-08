@@ -13,5 +13,6 @@ uint8_t I2C_read(void);
 void I2C_stop(void);
 void I2C_write_register(uint8_t register_to_write, uint8_t value);
 uint8_t I2C_read_register(uint8_t register_to_read);
+FlagStatus I2C_read_register_flag(uint8_t register_to_read, uint32_t I2C_FLAG);
 
 #endif

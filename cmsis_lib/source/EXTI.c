@@ -100,5 +100,5 @@ void initEXTIForGPIOA1(void)
 	EXTI_InitStructure.EXTI_LineCmd = ENABLE;
 	EXTI_Init(&EXTI_InitStructure);
 
-	SYSCFG_EXTILineConfig(GPIOA, EXTI_PinSource1);
+	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOA, EXTI_PinSource1);
 }

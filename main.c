@@ -80,16 +80,46 @@ void readAllRegistersConnectedToGestures()
 //    }
 //}
 
-//void EXTI1_IRQHandler(void)
-//{
-//	if(EXTI_GetITStatus(EXTI_Line1) != RESET)
-//	{
-//        GPIO_SetBits(GPIOD, GPIO_Pin_12);
-//
-//		EXTI_ClearITPendingBit(EXTI_Line1);
-//	}
-//}
+void EXTI1_IRQHandler(void)
+{
+	if(EXTI_GetITStatus(EXTI_Line1) != RESET)
+	{
+        handleGesture();
 
+        control_counter++;
+		EXTI_ClearITPendingBit(EXTI_Line1);
+	}
+}
+
+void handleGesture()
+{
+	if ( isGestureAvailable() ) {
+	    switch ( readGesture() ) {
+//	      case DIR_UP:
+//	        Serial.println("UP");
+//	        break;
+//	      case DIR_DOWN:
+//	        Serial.println("DOWN");
+//	        break;
+	      case DIR_LEFT:
+	    	  GPIO_ResetBits(GPIOD, GPIO_Pin_14);
+	    	  GPIO_SetBits(GPIOD, GPIO_Pin_12);
+	        break;
+	      case DIR_RIGHT:
+	    	GPIO_ResetBits(GPIOD, GPIO_Pin_12);
+	        GPIO_SetBits(GPIOD, GPIO_Pin_14);
+	        break;
+//	      case DIR_NEAR:
+//	        Serial.println("NEAR");
+//	        break;
+//	      case DIR_FAR:
+//	        Serial.println("FAR");
+//	        break;
+	      default:
+	    	  GPIO_SetBits(GPIOD, GPIO_Pin_15);
+	    }
+	  }
+	}
 
 int main(void)
 {
@@ -99,96 +129,45 @@ int main(void)
 	initGPIODiodes();
 
 //	enableGestureSensor(TRUE);
-	EnableGestureSensor();
-	initTimer5For30msDelay();
+//	EnableGestureSensor();
+//	initTimer5For30msDelay();
+//
+//	initNVICForEXTI1();
+//	ConfigureGestureSensorInterruptPin();
+//	initEXTIForGPIOA1();
 
+
+	//Configure ports and timer for delay
 	initNVICForEXTI1();
 	ConfigureGestureSensorInterruptPin();
 	initEXTIForGPIOA1();
+
+	init();
+
+	//Power on device
+	uint8_t receivedRegisterValue = I2C_read_register(0x80);
+	uint8_t valueToEnableDevice = 0x1;
+	I2C_write_register(0x80, receivedRegisterValue | valueToEnableDevice);
+
+	//Enable gestures
+	receivedRegisterValue = I2C_read_register(0x80);
+	uint8_t valueToEnableGestures = 0x64;
+	I2C_write_register(0x80, receivedRegisterValue | valueToEnableGestures);
+
+	enableGestureSensor(TRUE);
+
+
+//	EnableGestureSensor();
+
+
 
 
 	while (1)
 	{
 		readAllRegistersConnectedToGestures();
 
-		gestureAvailable = isGestureAvailable();
+//		control_counter = I2C_read_register_flag(APDS9960_GFIFO_R, I2C_FLAG_RXNE);
 
-	    if (gestureAvailable)
-	    {
-	    	gesture = readGesture();
 
-			switch (gesture)
-			{
-			  case DIR_UP:
-				GPIO_SetBits(GPIOD, GPIO_Pin_13);
-				break;
-			  case DIR_DOWN:
-				  GPIO_SetBits(GPIOD, GPIO_Pin_15);
-				break;
-			  case DIR_LEFT:
-				  GPIO_SetBits(GPIOD, GPIO_Pin_12);
-				break;
-			  case DIR_RIGHT:
-				  GPIO_SetBits(GPIOD, GPIO_Pin_14);
-				break;
-			  default:
-				break;
-
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  delay30ms();
-			  GPIO_ResetBits(GPIOD, GPIO_Pin_12);
-			  GPIO_ResetBits(GPIOD, GPIO_Pin_13);
-			  GPIO_ResetBits(GPIOD, GPIO_Pin_14);
-			  GPIO_ResetBits(GPIOD, GPIO_Pin_15);
-			}
-	    }
 	}
 }

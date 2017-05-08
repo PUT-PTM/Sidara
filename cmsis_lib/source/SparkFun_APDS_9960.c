@@ -9,10 +9,14 @@
 #include "stm32f4xx_exti.h"
 #include "misc.h"
 #include <math.h>
+#include "stm32f4xx_i2c.h"
 
+int whileCounter = 0;
 
 void EnableGestureSensor()
 {
+	resetGestureParameters();
+
 	//Power on device
 	uint8_t receivedRegisterValue = I2C_read_register(0x80);
 	uint8_t valueToEnableDevice = 0x1;
@@ -28,12 +32,21 @@ void EnableGestureSensor()
 	uint8_t valueToEnableDeviceInterrupt = 0x2;
 	I2C_write_register(0xAB, receivedRegisterValue | valueToEnableDeviceInterrupt);
 
+	I2C_write_register(APDS9960_WTIME, 0xFF);
+	I2C_write_register(APDS9960_PPULSE, DEFAULT_GESTURE_PPULSE);
+
+	setLEDBoost(LED_BOOST_300);
+	setGestureMode(1);
+
+	setMode(WAIT, 1);
+	setMode(PROXIMITY, 1);
+
 	initTimer5For30msDelay();
 }
 
 void ConfigureGestureSensorInterruptPin()
 {
-	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE);
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
 
 	GPIO_InitTypeDef  str;
 	str.GPIO_Pin = GPIO_Pin_1;
@@ -41,7 +54,7 @@ void ConfigureGestureSensorInterruptPin()
 	str.GPIO_OType = GPIO_OType_OD;
 	str.GPIO_Speed = GPIO_Speed_50MHz;
 	str.GPIO_PuPd = GPIO_PuPd_UP;
-	GPIO_Init(GPIOB, &str);
+	GPIO_Init(GPIOA, &str);
 }
 
 /**
@@ -55,24 +68,26 @@ void ConfigureGestureSensorInterruptPin()
 int wireReadDataBlock(uint8_t reg, uint8_t *val, unsigned int len)
 {
     unsigned char i = 0;
-
-//    /* Indicate which register we want to read from */
-//    if (!wireWriteByte(reg)) {
-//        return -1;
+//    uint8_t value = I2C_read_register(reg);
+//
+//    while (value != 0)
+//    {
+//        if (i >= len)
+//            return -1;
+//
+//        val[i] = value;
+//        i++;
+//        value = I2C_read_register(reg);
 //    }
+//
+//    return i;
 
-//    /* Read block data */
-//    Wire.requestFrom(APDS9960_I2C_ADDR, len);
-    uint8_t value = I2C_read_register(reg);
-
-    while (value != 0)
-    {
-        if (i >= len)
+    while (I2C_GetFlagStatus(I2C1, I2C_FLAG_RXNE)) {
+        if (i >= len) {
             return -1;
-
-        val[i] = value;
+        }
+        val[i] = I2C_read_register(reg);
         i++;
-        value = I2C_read_register(reg);
     }
 
     return i;
@@ -99,7 +114,7 @@ int readGesture()
 
     /* Keep looping as long as gesture data is valid */
     while(1) {
-
+    	whileCounter++;
         /* Wait some time to collect next batch of FIFO data */
         delay30ms();
 
@@ -186,12 +201,12 @@ bool isGestureAvailable()
     uint8_t val = I2C_read_register(APDS9960_GSTATUS);
 
     /* Read value from GSTATUS register */
-    if( !val ) {
-        return ERROR;
-    }
+//    if( !val ) {
+//        return ERROR;
+//    }
 
     /* Shift and mask out GVALID bit */
-    val &= APDS9960_GVALID;
+    val |= APDS9960_GVALID;
 
     /* Return true/false based on GVALID bit */
     if( val == 1) {
@@ -208,15 +223,15 @@ bool isGestureAvailable()
  */
 bool init()
 {
-    uint8_t id = I2C_read_register(APDS9960_ID);
-
-    /* Read ID register and check against known values for APDS-9960 */
-    if( !id ) {
-        return FALSE;
-    }
-    if( !(id == APDS9960_ID_1 || id == APDS9960_ID_2) ) {
-        return FALSE;
-    }
+//    uint8_t id = I2C_read_register(APDS9960_ID);
+//
+//    /* Read ID register and check against known values for APDS-9960 */
+//    if( !id ) {
+//        return FALSE;
+//    }
+//    if( !(id == APDS9960_ID_1 || id == APDS9960_ID_2) ) {
+//        return FALSE;
+//    }
 
     /* Set ENABLE register to 0 (disable all features) */
     if( !setMode(ALL, OFF) ) {
