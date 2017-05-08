@@ -244,5 +244,8 @@ bool enablePower();
 bool disablePower();
 void resetGestureParameters();
 
+void setLEDDrive(uint8_t drive);
+void setProximityGain(uint8_t drive);
+
 
 #endif

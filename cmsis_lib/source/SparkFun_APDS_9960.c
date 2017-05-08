@@ -114,7 +114,7 @@ int readGesture()
 
     /* Keep looping as long as gesture data is valid */
     while(1) {
-    	whileCounter++;
+
         /* Wait some time to collect next batch of FIFO data */
         delay30ms();
 
@@ -223,15 +223,16 @@ bool isGestureAvailable()
  */
 bool init()
 {
-//    uint8_t id = I2C_read_register(APDS9960_ID);
-//
-//    /* Read ID register and check against known values for APDS-9960 */
-//    if( !id ) {
-//        return FALSE;
-//    }
-//    if( !(id == APDS9960_ID_1 || id == APDS9960_ID_2) ) {
-//        return FALSE;
-//    }
+    uint8_t id = I2C_read_register(APDS9960_ID);
+    whileCounter = id;
+
+    /* Read ID register and check against known values for APDS-9960 */
+    if( !id ) {
+        return FALSE;
+    }
+    if( !(id == APDS9960_ID_1 || id == APDS9960_ID_2) ) {
+        return FALSE;
+    }
 
     /* Set ENABLE register to 0 (disable all features) */
     if( !setMode(ALL, OFF) ) {
@@ -245,8 +246,9 @@ bool init()
     I2C_write_register(APDS9960_POFFSET_UR, DEFAULT_POFFSET_UR);
     I2C_write_register(APDS9960_POFFSET_DL, DEFAULT_POFFSET_DL);
     I2C_write_register(APDS9960_CONFIG1, DEFAULT_CONFIG1);
-    I2C_write_register(APDS9960_CONFIG1, DEFAULT_CONFIG1);
 
+    setLEDDrive(DEFAULT_LDRIVE);
+    setProximityGain(DEFAULT_PGAIN);
 
     /* Set default values for gesture sense registers */
     setGestureEnterThresh(DEFAULT_GPENTH);
@@ -860,4 +862,55 @@ bool decodeGesture()
     }
 
     return TRUE;
+}
+
+/**
+ * @brief Sets the LED drive strength for proximity and ALS
+ *
+ * Value    LED Current
+ *   0        100 mA
+ *   1         50 mA
+ *   2         25 mA
+ *   3         12.5 mA
+ *
+ * @param[in] drive the value (0-3) for the LED drive strength
+ * @return True if operation successful. False otherwise.
+ */
+void setLEDDrive(uint8_t drive)
+{
+    uint8_t val = I2C_read_register(APDS9960_CONTROL);
+
+    /* Set bits in register to given value */
+    drive &= 0b00000011;
+    drive = drive << 6;
+    val &= 0b00111111;
+    val |= drive;
+
+    I2C_write_register(APDS9960_CONTROL, val);
+}
+
+
+/**
+ * @brief Sets the receiver gain for proximity detection
+ *
+ * Value    Gain
+ *   0       1x
+ *   1       2x
+ *   2       4x
+ *   3       8x
+ *
+ * @param[in] drive the value (0-3) for the gain
+ * @return True if operation successful. False otherwise.
+ */
+void setProximityGain(uint8_t drive)
+{
+    uint8_t val = I2C_read_register(APDS9960_CONTROL);
+
+    /* Set bits in register to given value */
+    drive &= 0b00000011;
+    drive = drive << 2;
+    val &= 0b11110011;
+    val |= drive;
+
+    I2C_write_register(APDS9960_CONTROL, val);
 }
