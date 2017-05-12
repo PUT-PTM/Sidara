@@ -152,7 +152,7 @@ void EXTI1_IRQHandler(void)
 {
 	if(EXTI_GetITStatus(EXTI_Line1) != RESET)
 	{
-//        handleGesture();
+        handleGesture();
 
         control_counter++;
 		EXTI_ClearITPendingBit(EXTI_Line1);
@@ -212,20 +212,20 @@ int main(void)
 
 	init();
 
-	//Power on device
-	uint8_t receivedRegisterValue = I2C_read_register(0x80);
-	uint8_t valueToEnableDevice = 0x1;
-	I2C_write_register(0x80, receivedRegisterValue | valueToEnableDevice);
-
-	//Enable gestures
-	receivedRegisterValue = I2C_read_register(0x80);
-	uint8_t valueToEnableGestures = 0x64;
-	I2C_write_register(0x80, receivedRegisterValue | valueToEnableGestures);
+//	//Power on device
+//	uint8_t receivedRegisterValue = I2C_read_register(0x80);
+//	uint8_t valueToEnableDevice = 0x1;
+//	I2C_write_register(0x80, receivedRegisterValue | valueToEnableDevice);
+//
+//	//Enable gestures
+//	receivedRegisterValue = I2C_read_register(0x80);
+//	uint8_t valueToEnableGestures = 0x64;
+//	I2C_write_register(0x80, receivedRegisterValue | valueToEnableGestures);
 
 	enableGestureSensor(TRUE);
 
 
-//	EnableGestureSensor();
+	EnableGestureSensor();
 
 
 

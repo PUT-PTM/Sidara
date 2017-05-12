@@ -246,6 +246,12 @@ void resetGestureParameters();
 
 void setLEDDrive(uint8_t drive);
 void setProximityGain(uint8_t drive);
+void setAmbientLightGain(uint8_t drive);
+void setProxIntLowThresh(uint8_t threshold);
+void setProxIntHighThresh(uint8_t threshold);
+void setLightIntLowThreshold(uint16_t threshold);
+void setLightIntHighThreshold(uint16_t threshold);
+
 
 
 #endif

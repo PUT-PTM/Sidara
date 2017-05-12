@@ -249,6 +249,15 @@ bool init()
 
     setLEDDrive(DEFAULT_LDRIVE);
     setProximityGain(DEFAULT_PGAIN);
+    setAmbientLightGain(DEFAULT_AGAIN);
+    setProxIntLowThresh(DEFAULT_PILT);
+    setProxIntHighThresh(DEFAULT_PIHT);
+    setLightIntLowThreshold(DEFAULT_AILT);
+    setLightIntHighThreshold(DEFAULT_AIHT);
+
+    I2C_write_register(APDS9960_PERS, DEFAULT_PERS);
+    I2C_write_register(APDS9960_CONFIG2, DEFAULT_CONFIG2);
+    I2C_write_register(APDS9960_CONFIG3, DEFAULT_CONFIG3);
 
     /* Set default values for gesture sense registers */
     setGestureEnterThresh(DEFAULT_GPENTH);
@@ -874,7 +883,6 @@ bool decodeGesture()
  *   3         12.5 mA
  *
  * @param[in] drive the value (0-3) for the LED drive strength
- * @return True if operation successful. False otherwise.
  */
 void setLEDDrive(uint8_t drive)
 {
@@ -900,7 +908,6 @@ void setLEDDrive(uint8_t drive)
  *   3       8x
  *
  * @param[in] drive the value (0-3) for the gain
- * @return True if operation successful. False otherwise.
  */
 void setProximityGain(uint8_t drive)
 {
@@ -913,4 +920,96 @@ void setProximityGain(uint8_t drive)
     val |= drive;
 
     I2C_write_register(APDS9960_CONTROL, val);
+}
+
+/**
+ * @brief Sets the receiver gain for the ambient light sensor (ALS)
+ *
+ * Value    Gain
+ *   0        1x
+ *   1        4x
+ *   2       16x
+ *   3       64x
+ *
+ * @param[in] drive the value (0-3) for the gain
+ */
+void setAmbientLightGain(uint8_t drive)
+{
+    /* Read value from CONTROL register */
+    uint8_t val = I2C_read_register(APDS9960_CONTROL);
+
+    /* Set bits in register to given value */
+    drive &= 0b00000011;
+    val &= 0b11111100;
+    val |= drive;
+
+    /* Write register value back into CONTROL register */
+    I2C_write_register(APDS9960_CONTROL, val);
+}
+
+
+/**
+ * @brief Sets the lower threshold for proximity detection
+ *
+ * @param[in] threshold the lower proximity threshold
+ */
+void setProxIntLowThresh(uint8_t threshold)
+{
+	I2C_write_register(APDS9960_PILT, threshold);
+}
+
+
+/**
+ * @brief Sets the high threshold for proximity detection
+ *
+ * @param[in] threshold the high proximity threshold
+ */
+void setProxIntHighThresh(uint8_t threshold)
+{
+	I2C_write_register(APDS9960_PILT, threshold);
+}
+
+
+/**
+ * @brief Sets the low threshold for ambient light interrupts
+ *
+ * @param[in] threshold low threshold value for interrupt to trigger
+ */
+void setLightIntLowThreshold(uint16_t threshold)
+{
+    uint8_t val_low;
+    uint8_t val_high;
+
+    /* Break 16-bit threshold into 2 8-bit values */
+    val_low = threshold & 0x00FF;
+    val_high = (threshold & 0xFF00) >> 8;
+
+    /* Write low byte */
+    I2C_write_register(APDS9960_AILTL, val_low);
+
+    /* Write high byte */
+    I2C_write_register(APDS9960_AILTH, val_high);
+}
+
+
+/**
+ * @brief Sets the high threshold for ambient light interrupts
+ *
+ * @param[in] threshold high threshold value for interrupt to trigger
+ * @return True if operation successful. False otherwise.
+ */
+void setLightIntHighThreshold(uint16_t threshold)
+{
+    uint8_t val_low;
+    uint8_t val_high;
+
+    /* Break 16-bit threshold into 2 8-bit values */
+    val_low = threshold & 0x00FF;
+    val_high = (threshold & 0xFF00) >> 8;
+
+    /* Write low byte */
+    I2C_write_register(APDS9960_AIHTL, val_low);
+
+    /* Write high byte */
+    I2C_write_register(APDS9960_AIHTH, val_high);
 }
