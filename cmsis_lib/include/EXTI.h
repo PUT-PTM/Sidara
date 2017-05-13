@@ -9,5 +9,6 @@ void initEXTIUserButton(void);
 void initTimer2ForDebouncing(void);
 
 void initNVICForEXTI1(void);
+void initEXTIForGPIOA1(void);
 
 #endif

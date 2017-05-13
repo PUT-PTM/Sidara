@@ -187,7 +187,7 @@ void initTimer5For30msDelay()
 /**
  *
  * must be configured with
- * -> initTimer2For30msDelay();
+ * -> initTime5For30msDelay();
  */
 void delay30ms()
 {

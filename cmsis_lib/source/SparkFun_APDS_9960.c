@@ -10,6 +10,7 @@
 #include "misc.h"
 #include <math.h>
 #include "stm32f4xx_i2c.h"
+#include "EXTI.h"
 
 int whileCounter = 0;
 
@@ -32,8 +33,8 @@ void EnableGestureSensor()
 	uint8_t valueToEnableDeviceInterrupt = 0x2;
 	I2C_write_register(0xAB, receivedRegisterValue | valueToEnableDeviceInterrupt);
 
-	I2C_write_register(APDS9960_WTIME, 0xFF);
-	I2C_write_register(APDS9960_PPULSE, DEFAULT_GESTURE_PPULSE);
+	 I2C_write_register(APDS9960_WTIME, 0xFF);
+	 I2C_write_register(APDS9960_PPULSE, DEFAULT_GESTURE_PPULSE);
 
 	setLEDBoost(LED_BOOST_300);
 	setGestureMode(1);
@@ -68,27 +69,26 @@ void ConfigureGestureSensorInterruptPin()
 int wireReadDataBlock(uint8_t reg, uint8_t *val, unsigned int len)
 {
     unsigned char i = 0;
-//    uint8_t value = I2C_read_register(reg);
-//
-//    while (value != 0)
-//    {
-//        if (i >= len)
-//            return -1;
-//
-//        val[i] = value;
-//        i++;
-//        value = I2C_read_register(reg);
-//    }
-//
-//    return i;
+    uint8_t value;
+    value = I2C_read_register(reg);
 
-    while (I2C_GetFlagStatus(I2C1, I2C_FLAG_RXNE)) {
-        if (i >= len) {
+    while (value != 0)
+    {
+        if (i >= len)
             return -1;
-        }
-        val[i] = I2C_read_register(reg);
+
+        val[i] = value;
         i++;
+        value = I2C_read_register(reg);
     }
+
+//    while (I2C_GetFlagStatus(I2C1, I2C_FLAG_RXNE)) {
+//        if (i >= len) {
+//            return -1;
+//        }
+//        val[i] = I2C_read_register(reg);
+//        i++;
+//    }
 
     return i;
 }
@@ -114,7 +114,7 @@ int readGesture()
 
     /* Keep looping as long as gesture data is valid */
     while(1) {
-
+    	GPIO_SetBits(GPIOD, GPIO_Pin_15);
         /* Wait some time to collect next batch of FIFO data */
         delay30ms();
 
@@ -129,13 +129,13 @@ int readGesture()
 
             /* If there's stuff in the FIFO, read it into our data block */
             if( fifo_level > 0) {
+
                 bytes_read = wireReadDataBlock(  APDS9960_GFIFO_U,
                                                 (uint8_t*)fifo_data,
                                                 (fifo_level * 4) );
                 if( bytes_read == -1 ) {
                     return ERROR;
                 }
-
                 /* If at least 1 set of data, sort the data into U/D/L/R */
                 if( bytes_read >= 4 ) {
                     for( i = 0; i < bytes_read; i += 4 ) {
@@ -164,7 +164,6 @@ int readGesture()
                 }
             }
         } else {
-
             /* Determine best guessed gesture and clean up */
             delay30ms();
             decodeGesture();

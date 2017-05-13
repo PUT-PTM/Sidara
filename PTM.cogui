@@ -24,34 +24,39 @@
 <part id="4"/>
 <part id="2"/>
 <part id="3"/>
+<part id="5"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" path="C:/CooCox/CoIDE/workspace/Sidara/main.c" title="main.c" tooltip="C:/CooCox/CoIDE/workspace/Sidara/main.c" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" path="C:/CooCox/CoIDE/workspace/Sidara/main.c" title="main.c" tooltip="C:/CooCox/CoIDE/workspace/Sidara/main.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/PTM/main.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3419" selectionTopPixel="2220"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3983" selectionTopPixel="2548"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="SparkFun_APDS_9960.h" partName="SparkFun_APDS_9960.h" path="C:/CooCox/CoIDE/workspace/Sidara/cmsis_lib/include/SparkFun_APDS_9960.h" title="SparkFun_APDS_9960.h" tooltip="C:/CooCox/CoIDE/workspace/Sidara/cmsis_lib/include/SparkFun_APDS_9960.h" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/PTM/cmsis_lib/include/SparkFun_APDS_9960.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="7914" selectionTopPixel="3381"/>
+<editorState selectionHorizontalPixel="0" selectionLength="5" selectionOffset="3211" selectionTopPixel="1428"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="I2C.h" partName="I2C.h" path="C:/CooCox/CoIDE/workspace/Sidara/cmsis_lib/include/I2C.h" title="I2C.h" tooltip="C:/CooCox/CoIDE/workspace/Sidara/cmsis_lib/include/I2C.h" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/PTM/cmsis_lib/include/I2C.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="399" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="452" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="I2C.c" partName="I2C.c" path="C:/CooCox/CoIDE/workspace/Sidara/cmsis_lib/source/I2C.c" title="I2C.c" tooltip="C:/CooCox/CoIDE/workspace/Sidara/cmsis_lib/source/I2C.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/PTM/cmsis_lib/source/I2C.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1222" selectionTopPixel="160"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1698" selectionTopPixel="1060"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="SparkFun_APDS_9960.c" partName="SparkFun_APDS_9960.c" path="C:/CooCox/CoIDE/workspace/Sidara/cmsis_lib/source/SparkFun_APDS_9960.c" title="SparkFun_APDS_9960.c" tooltip="C:/CooCox/CoIDE/workspace/Sidara/cmsis_lib/source/SparkFun_APDS_9960.c" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="SparkFun_APDS_9960.c" partName="SparkFun_APDS_9960.c" path="C:/CooCox/CoIDE/workspace/Sidara/cmsis_lib/source/SparkFun_APDS_9960.c" title="SparkFun_APDS_9960.c" tooltip="C:/CooCox/CoIDE/workspace/Sidara/cmsis_lib/source/SparkFun_APDS_9960.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/PTM/cmsis_lib/source/SparkFun_APDS_9960.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="24548" selectionTopPixel="14720"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="281" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="Timer.c" partName="Timer.c" path="C:/CooCox/CoIDE/workspace/Sidara/cmsis_lib/source/Timer.c" title="Timer.c" tooltip="C:/CooCox/CoIDE/workspace/Sidara/cmsis_lib/source/Timer.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/PTM/cmsis_lib/source/Timer.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="4722" selectionTopPixel="2497"/>
 </editor>
 </editors>
 <views>
 <view id="org.coocox.builder.ui.views.ProjectView" partName="Project">
-<viewState CommonNavigator.LINKING_ENABLED="0" horizontalPosition="0" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0" verticalPosition="5">
+<viewState CommonNavigator.LINKING_ENABLED="0" horizontalPosition="0" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0" verticalPosition="4">
 <expanded>
 <element path="/PTM"/>
 <element path="/PTM/cmsis_lib"/>
@@ -59,7 +64,7 @@
 <element path="/PTM/cmsis_lib/source"/>
 </expanded>
 <selection>
-<element path="/PTM/cmsis_lib/source/SparkFun_APDS_9960.c"/>
+<element path="/PTM/cmsis_lib/source/Timer.c"/>
 </selection>
 </viewState>
 </view>
@@ -108,7 +113,7 @@
 <fastViewBars>
 <fastViewBar fastViewLocation="1024" id="org.eclipse.ui.internal.ViewStack@2396a0" orientation="256" selectedTabId="org.eclipse.ui.console.ConsoleView" style="0">
 <fastViews>
-<view id="org.eclipse.ui.console.ConsoleView" ratio="0.29828325"/>
+<view id="org.eclipse.ui.console.ConsoleView" ratio="0.2972103"/>
 </fastViews>
 </fastViewBar>
 </fastViewBars>
@@ -277,158 +282,162 @@
 <editors>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/PTM/cmsis_lib/source/SparkFun_APDS_9960.c"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/PTM/cmsis_lib/include/SparkFun_APDS_9960.h"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/PTM/main.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/PTM/cmsis_lib/source/Timer.c"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/PTM/cmsis_lib/include/I2C.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/PTM/cmsis_lib/source/I2C.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/PTM/cmsis_lib/include/SparkFun_APDS_9960.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/PTM/main.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/PTM/cmsis_lib/source/Timer.c"/>
 </editors>
-<item historyLabel="main.c" index="2">
-<position info="not_deleted" x="5063" y="0"/>
+<item historyLabel="SparkFun_APDS_9960.c" index="0">
+<position info="not_deleted" x="858" y="0"/>
 </item>
 <item historyLabel="SparkFun_APDS_9960.h" index="1">
-<position info="not_deleted" x="2304" y="4"/>
+<position info="not_deleted" x="503" y="5"/>
 </item>
 <item historyLabel="SparkFun_APDS_9960.c" index="0">
-<position info="not_deleted" x="8201" y="0"/>
+<position info="not_deleted" x="2538" y="8"/>
 </item>
-<item historyLabel="main.c" index="2">
-<position info="not_deleted" x="4481" y="0"/>
+<item historyLabel="Timer.c" index="2">
+<position info="not_deleted" x="4722" y="0"/>
+</item>
+<item historyLabel="SparkFun_APDS_9960.c" index="0">
+<position info="not_deleted" x="2974" y="0"/>
+</item>
+<item historyLabel="Timer.c" index="2">
+<position info="not_deleted" x="4580" y="0"/>
+</item>
+<item historyLabel="SparkFun_APDS_9960.h" index="1">
+<position info="not_deleted" x="576" y="0"/>
+</item>
+<item historyLabel="Timer.c" index="2">
+<position info="not_deleted" x="4722" y="0"/>
+</item>
+<item historyLabel="SparkFun_APDS_9960.c" index="0">
+<position info="not_deleted" x="2974" y="0"/>
+</item>
+<item historyLabel="Timer.c" index="2">
+<position info="not_deleted" x="4722" y="0"/>
+</item>
+<item historyLabel="SparkFun_APDS_9960.c" index="0">
+<position info="not_deleted" x="2974" y="0"/>
 </item>
 <item historyLabel="I2C.h" index="3">
-<position info="not_deleted" x="399" y="0"/>
+<position info="not_deleted" x="452" y="0"/>
 </item>
 <item historyLabel="SparkFun_APDS_9960.c" index="0">
-<position info="not_deleted" x="8199" y="0"/>
-</item>
-<item historyLabel="SparkFun_APDS_9960.h" index="1">
-<position info="not_deleted" x="2304" y="4"/>
+<position/>
 </item>
 <item historyLabel="I2C.h" index="3">
-<position info="not_deleted" x="399" y="0"/>
+<position info="not_deleted" x="452" y="0"/>
+</item>
+<item historyLabel="I2C.c" index="4">
+<position info="not_deleted" x="2467" y="0"/>
+</item>
+<item historyLabel="I2C.h" index="3">
+<position info="not_deleted" x="452" y="0"/>
+</item>
+<item historyLabel="I2C.c" index="4">
+<position info="not_deleted" x="1698" y="0"/>
 </item>
 <item historyLabel="SparkFun_APDS_9960.c" index="0">
-<position info="not_deleted" x="2800" y="0"/>
+<position/>
 </item>
-<item historyLabel="SparkFun_APDS_9960.h" index="1">
-<position info="not_deleted" x="2304" y="4"/>
+<item historyLabel="SparkFun_APDS_9960.h" index="5">
+<position info="not_deleted" x="576" y="0"/>
 </item>
-<item historyLabel="SparkFun_APDS_9960.c" index="0">
-<position info="not_deleted" x="2800" y="0"/>
+<item historyLabel="main.c" index="6">
+<position/>
 </item>
-<item historyLabel="SparkFun_APDS_9960.h" index="1">
-<position info="not_deleted" x="5743" y="0"/>
-</item>
-<item historyLabel="main.c" index="2">
-<position info="not_deleted" x="4673" y="0"/>
+<item historyLabel="SparkFun_APDS_9960.h" index="5">
+<position info="not_deleted" x="362" y="0"/>
 </item>
 <item historyLabel="SparkFun_APDS_9960.c" index="0">
-<position info="not_deleted" x="2800" y="0"/>
+<position/>
 </item>
-<item historyLabel="SparkFun_APDS_9960.h" index="1">
-<position info="not_deleted" x="2348" y="36"/>
-</item>
-<item historyLabel="SparkFun_APDS_9960.c" index="0">
-<position info="not_deleted" x="6787" y="0"/>
-</item>
-<item historyLabel="SparkFun_APDS_9960.h" index="1">
-<position info="not_deleted" x="3480" y="1"/>
+<item historyLabel="main.c" index="6">
+<position info="not_deleted" x="4290" y="19"/>
 </item>
 <item historyLabel="SparkFun_APDS_9960.c" index="0">
-<position info="not_deleted" x="6617" y="0"/>
+<position/>
 </item>
-<item historyLabel="SparkFun_APDS_9960.h" index="1">
-<position info="not_deleted" x="682" y="0"/>
-</item>
-<item historyLabel="SparkFun_APDS_9960.c" index="0">
-<position info="not_deleted" x="6617" y="0"/>
-</item>
-<item historyLabel="SparkFun_APDS_9960.h" index="1">
-<position info="not_deleted" x="902" y="0"/>
-</item>
-<item historyLabel="main.c" index="2">
-<position info="not_deleted" x="4548" y="0"/>
-</item>
-<item historyLabel="SparkFun_APDS_9960.h" index="1">
-<position info="not_deleted" x="902" y="0"/>
+<item historyLabel="SparkFun_APDS_9960.h" index="5">
+<position info="not_deleted" x="362" y="0"/>
 </item>
 <item historyLabel="SparkFun_APDS_9960.c" index="0">
-<position info="not_deleted" x="6617" y="0"/>
+<position info="not_deleted" x="14738" y="0"/>
 </item>
 <item historyLabel="SparkFun_APDS_9960.c" index="0">
-<position info="not_deleted" x="6783" y="0"/>
+<position info="not_deleted" x="15412" y="0"/>
+</item>
+<item historyLabel="main.c" index="6">
+<position/>
+</item>
+<item historyLabel="SparkFun_APDS_9960.h" index="5">
+<position info="not_deleted" x="362" y="0"/>
 </item>
 <item historyLabel="SparkFun_APDS_9960.c" index="0">
-<position info="not_deleted" x="8335" y="0"/>
+<position/>
 </item>
-<item historyLabel="SparkFun_APDS_9960.h" index="1">
-<position info="not_deleted" x="902" y="0"/>
+<item historyLabel="main.c" index="6">
+<position info="not_deleted" x="4195" y="0"/>
 </item>
-<item historyLabel="SparkFun_APDS_9960.c" index="0">
-<position info="not_deleted" x="6734" y="0"/>
-</item>
-<item historyLabel="SparkFun_APDS_9960.h" index="1">
-<position info="not_deleted" x="902" y="0"/>
+<item historyLabel="SparkFun_APDS_9960.h" index="5">
+<position info="not_deleted" x="362" y="0"/>
 </item>
 <item historyLabel="SparkFun_APDS_9960.c" index="0">
-<position info="not_deleted" x="6822" y="0"/>
-</item>
-<item historyLabel="main.c" index="2">
-<position info="not_deleted" x="4206" y="0"/>
+<position/>
 </item>
 <item historyLabel="SparkFun_APDS_9960.c" index="0">
-<position info="not_deleted" x="8251" y="0"/>
-</item>
-<item historyLabel="SparkFun_APDS_9960.h" index="1">
-<position info="not_deleted" x="902" y="0"/>
-</item>
-<item historyLabel="main.c" index="2">
-<position info="not_deleted" x="4206" y="0"/>
-</item>
-<item historyLabel="SparkFun_APDS_9960.h" index="1">
-<position info="not_deleted" x="902" y="0"/>
+<position/>
 </item>
 <item historyLabel="SparkFun_APDS_9960.c" index="0">
-<position info="not_deleted" x="6959" y="0"/>
-</item>
-<item historyLabel="main.c" index="2">
-<position info="not_deleted" x="3419" y="0"/>
-</item>
-<item historyLabel="SparkFun_APDS_9960.h" index="1">
-<position info="not_deleted" x="708" y="0"/>
+<position/>
 </item>
 <item historyLabel="SparkFun_APDS_9960.c" index="0">
-<position info="not_deleted" x="24522" y="11"/>
-</item>
-<item historyLabel="SparkFun_APDS_9960.h" index="1">
-<position info="not_deleted" x="708" y="0"/>
-</item>
-<item historyLabel="SparkFun_APDS_9960.h" index="1">
-<position info="not_deleted" x="7874" y="0"/>
+<position/>
 </item>
 <item historyLabel="SparkFun_APDS_9960.c" index="0">
-<position info="not_deleted" x="24533" y="15"/>
-</item>
-<item historyLabel="SparkFun_APDS_9960.h" index="1">
-<position info="not_deleted" x="7916" y="0"/>
+<position/>
 </item>
 <item historyLabel="SparkFun_APDS_9960.c" index="0">
-<position info="not_deleted" x="24533" y="15"/>
+<position/>
 </item>
 <item historyLabel="SparkFun_APDS_9960.c" index="0">
-<position info="not_deleted" x="24800" y="0"/>
+<position/>
 </item>
-<item historyLabel="SparkFun_APDS_9960.h" index="1">
-<position info="not_deleted" x="7847" y="0"/>
-</item>
-<item historyLabel="SparkFun_APDS_9960.c" index="0">
-<position info="not_deleted" x="24800" y="0"/>
+<item historyLabel="SparkFun_APDS_9960.h" index="5">
+<position info="not_deleted" x="3211" y="5"/>
 </item>
 <item historyLabel="SparkFun_APDS_9960.c" index="0">
-<position info="not_deleted" x="25080" y="36"/>
+<position/>
 </item>
-<item historyLabel="SparkFun_APDS_9960.h" index="1">
-<position info="not_deleted" x="7914" y="0"/>
+<item historyLabel="I2C.h" index="3">
+<position info="not_deleted" x="452" y="0"/>
 </item>
-<item active="true" historyLabel="SparkFun_APDS_9960.c" index="0">
-<position info="not_deleted" x="25080" y="36"/>
+<item historyLabel="I2C.c" index="4">
+<position info="not_deleted" x="1698" y="0"/>
+</item>
+<item historyLabel="Timer.c" index="7">
+<position info="not_deleted" x="4722" y="0"/>
+</item>
+<item historyLabel="main.c" index="6">
+<position info="not_deleted" x="4291" y="0"/>
+</item>
+<item historyLabel="SparkFun_APDS_9960.h" index="5">
+<position info="not_deleted" x="3211" y="5"/>
+</item>
+<item historyLabel="SparkFun_APDS_9960.c" index="0">
+<position/>
+</item>
+<item historyLabel="I2C.h" index="3">
+<position info="not_deleted" x="452" y="0"/>
+</item>
+<item historyLabel="SparkFun_APDS_9960.c" index="0">
+<position info="not_deleted" x="281" y="0"/>
+</item>
+<item active="true" historyLabel="main.c" index="6">
+<position info="not_deleted" x="4291" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -437,6 +446,9 @@
 <actionBarAdvisor/>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="Timer.c" tooltip="PTM/cmsis_lib/source/Timer.c">
+<persistable path="/PTM/cmsis_lib/source/Timer.c"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="SparkFun_APDS_9960.c" tooltip="PTM/cmsis_lib/source/SparkFun_APDS_9960.c">
 <persistable path="/PTM/cmsis_lib/source/SparkFun_APDS_9960.c"/>
 </file>
@@ -454,9 +466,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="GPIO.c" tooltip="PTM/cmsis_lib/source/GPIO.c">
 <persistable path="/PTM/cmsis_lib/source/GPIO.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="Timer.c" tooltip="PTM/cmsis_lib/source/Timer.c">
-<persistable path="/PTM/cmsis_lib/source/Timer.c"/>
 </file>
 <file factoryID="org.coocox.component.ui.editors.repository.RepositoryElementFactory" id="org.coocox.builder.ui.editors.repository.RepositoryBrowser" name="Repository" tooltip="Repository">
 <persistable>&#x0A;<subPage/>

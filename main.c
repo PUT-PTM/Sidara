@@ -12,6 +12,7 @@
 #include "SparkFun_APDS_9960.h"
 #include "EXTI.h"
 #include "GPIO.h"
+#include "Timer.h"
 
 
 /* All registers connected to gestures */
@@ -136,23 +137,11 @@ void readAllRegistersConnectedToGestures()
 	PA1 = GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_1);
 }
 
-
-//void handleGesture()
-//{
-//    if ( isGestureAvailable() )
-//    {
-//    	switch ( readGesture() )
-//    	{
-//
-//    	}
-//    }
-//}
-
 void EXTI1_IRQHandler(void)
 {
 	if(EXTI_GetITStatus(EXTI_Line1) != RESET)
 	{
-        handleGesture();
+//        handleGesture();
 
         control_counter++;
 		EXTI_ClearITPendingBit(EXTI_Line1);
@@ -196,38 +185,13 @@ int main(void)
 	I2C_init();
 	initGPIODiodes();
 
-//	enableGestureSensor(TRUE);
-//	EnableGestureSensor();
-//	initTimer5For30msDelay();
-//
-//	initNVICForEXTI1();
-//	ConfigureGestureSensorInterruptPin();
-//	initEXTIForGPIOA1();
-
-
-	//Configure ports and timer for delay
-	initNVICForEXTI1();
 	ConfigureGestureSensorInterruptPin();
+	initNVICForEXTI1();
 	initEXTIForGPIOA1();
 
 	init();
-
-//	//Power on device
-//	uint8_t receivedRegisterValue = I2C_read_register(0x80);
-//	uint8_t valueToEnableDevice = 0x1;
-//	I2C_write_register(0x80, receivedRegisterValue | valueToEnableDevice);
-//
-//	//Enable gestures
-//	receivedRegisterValue = I2C_read_register(0x80);
-//	uint8_t valueToEnableGestures = 0x64;
-//	I2C_write_register(0x80, receivedRegisterValue | valueToEnableGestures);
-
 	enableGestureSensor(TRUE);
-
-
 	EnableGestureSensor();
-
-
 
 
 	while (1)
