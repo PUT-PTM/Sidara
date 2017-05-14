@@ -152,7 +152,7 @@ void EXTI1_IRQHandler(void)
 {
 	if(EXTI_GetITStatus(EXTI_Line1) != RESET)
 	{
-        handleGesture();
+//        handleGesture();
 
         control_counter++;
 		EXTI_ClearITPendingBit(EXTI_Line1);
