@@ -33,8 +33,8 @@ void EnableGestureSensor()
 	uint8_t valueToEnableDeviceInterrupt = 0x2;
 	I2C_write_register(0xAB, receivedRegisterValue | valueToEnableDeviceInterrupt);
 
-	 I2C_write_register(APDS9960_WTIME, 0xFF);
-	 I2C_write_register(APDS9960_PPULSE, DEFAULT_GESTURE_PPULSE);
+	I2C_write_register(APDS9960_WTIME, 0xFF);
+	I2C_write_register(APDS9960_PPULSE, DEFAULT_GESTURE_PPULSE);
 
 	setLEDBoost(LED_BOOST_300);
 	setGestureMode(1);
@@ -42,7 +42,7 @@ void EnableGestureSensor()
 	setMode(WAIT, 1);
 	setMode(PROXIMITY, 1);
 
-	initTimer5For30msDelay();
+	 initTimer5For30msDelay();
 }
 
 void ConfigureGestureSensorInterruptPin()
