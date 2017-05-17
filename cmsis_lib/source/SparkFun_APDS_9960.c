@@ -41,8 +41,6 @@ void EnableGestureSensor()
 
 	setMode(WAIT, 1);
 	setMode(PROXIMITY, 1);
-
-	 initTimer5For30msDelay();
 }
 
 void ConfigureGestureSensorInterruptPin()
@@ -54,7 +52,7 @@ void ConfigureGestureSensorInterruptPin()
 	str.GPIO_Mode = GPIO_Mode_IN;
 	str.GPIO_OType = GPIO_OType_OD;
 	str.GPIO_Speed = GPIO_Speed_50MHz;
-	str.GPIO_PuPd = GPIO_PuPd_UP;
+	str.GPIO_PuPd = GPIO_PuPd_NOPULL;
 	GPIO_Init(GPIOA, &str);
 }
 
@@ -70,18 +68,18 @@ int wireReadDataBlock(uint8_t reg, uint8_t *val, unsigned int len)
 {
     unsigned char i = 0;
     uint8_t value;
-    value = I2C_read_register(reg);
-
-    while (value != 0)
-    {
-        if (i >= len)
-            return -1;
-
-        val[i] = value;
-        i++;
-        value = I2C_read_register(reg);
-    }
-
+//    value = I2C_read_register(reg);
+//
+//    while (value != 0)
+//    {
+//        if (i >= len)
+//            return -1;
+//
+//        val[i] = value;
+//        i++;
+//        value = I2C_read_register(reg);
+//    }
+//
 //    while (I2C_GetFlagStatus(I2C1, I2C_FLAG_RXNE)) {
 //        if (i >= len) {
 //            return -1;
@@ -108,19 +106,20 @@ int readGesture()
     int i;
 
     /* Make sure that power and gesture is on and data is valid */
-    if( !isGestureAvailable() || !(getMode() & 0b01000001) ) {
-        return DIR_NONE;
-    }
+//    if( !isGestureAvailable() || !(getMode() & 0b01000001) ) {
+//        return DIR_NONE;
+//    }
 
     /* Keep looping as long as gesture data is valid */
     while(1) {
-    	GPIO_SetBits(GPIOD, GPIO_Pin_15);
+
         /* Wait some time to collect next batch of FIFO data */
         delay30ms();
 
         /* Get the contents of the STATUS register. Is data still valid? */
         gstatus = I2C_read_register(APDS9960_GSTATUS);
-
+        if(gstatus == 0)
+        	GPIO_SetBits(GPIOD, GPIO_Pin_13);
         /* If we have valid data, read in FIFO */
         if( (gstatus & APDS9960_GVALID) == APDS9960_GVALID ) {
 
@@ -130,7 +129,7 @@ int readGesture()
             /* If there's stuff in the FIFO, read it into our data block */
             if( fifo_level > 0) {
 
-                bytes_read = wireReadDataBlock(  APDS9960_GFIFO_U,
+                bytes_read = I2C_read_untill_empty(  APDS9960_GFIFO_U,
                                                 (uint8_t*)fifo_data,
                                                 (fifo_level * 4) );
                 if( bytes_read == -1 ) {
@@ -168,6 +167,7 @@ int readGesture()
             delay30ms();
             decodeGesture();
             motion = gesture_motion_;
+//            GPIO_SetBits(GPIOD, GPIO_Pin_15);
 
             resetGestureParameters();
             return motion;

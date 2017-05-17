@@ -35,16 +35,15 @@ void initUSART(void)
 
 void sendUSART(char sign)
 {
-	while (USART_GetFlagStatus(USART3, USART_FLAG_TXE) == RESET)
-		;
+	while (USART_GetFlagStatus(USART3, USART_FLAG_TXE) == RESET);
 	USART_SendData(USART3, sign);
-	while (USART_GetFlagStatus(USART3, USART_FLAG_TC) == RESET)
-		;
+	while (USART_GetFlagStatus(USART3, USART_FLAG_TC) == RESET);
 }
 
 char readUSART(void)
 {
 	while (USART_GetFlagStatus(USART3, USART_FLAG_RXNE) == RESET);
+	GPIO_SetBits(GPIOD, GPIO_Pin_15);
 	return USART_ReceiveData(USART3);
 }
 

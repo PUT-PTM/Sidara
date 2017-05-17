@@ -171,7 +171,7 @@ void initTimer3_1HZ(void)
 	TIM_Cmd(TIM3, ENABLE);
 }
 
-void initTimer5For30msDelay()
+void initTimer5For30msDelay(void)
 {
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, ENABLE);
 
@@ -187,9 +187,9 @@ void initTimer5For30msDelay()
 /**
  *
  * must be configured with
- * -> initTime5For30msDelay();
+ * -> initTimer5For30msDelay();
  */
-void delay30ms()
+void delay30ms(void)
 {
 	TIM_Cmd(TIM5, ENABLE);
 	while(TIM5->CNT < 999) {  }

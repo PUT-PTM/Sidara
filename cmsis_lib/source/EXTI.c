@@ -98,6 +98,9 @@ void initEXTIForGPIOA1(void)
 	EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
 	EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling;
 	EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+
+	EXTI_ClearITPendingBit(EXTI_Line1);
+
 	EXTI_Init(&EXTI_InitStructure);
 
 	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOA, EXTI_PinSource1);
