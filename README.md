@@ -3,7 +3,7 @@
 ## Open source academic project for Microprocessors Lab
 
 Sidara is a project of basic acoustic guitar simulator, that uses optic sensor, DAC, and card reader to produce basic guitar chord sounds.
-Built on STM32F407G microprocessor. 
+Built on STM32F407G microprocessor and Arduino.
 
 Communication with components:
 <ul>
@@ -22,7 +22,7 @@ USART Connection (Arduino -> STM32F4)
 &emsp;&emsp;RxD(0) -> PC10<br/>
 &emsp;&emsp;TxD(1) -> PC11<br/>
 
-SD Card Module connection:<br/>
+SD Card Module connection: (To STM32F4)<br/>
 &emsp;&emsp;GND -> GND<br/>
 &emsp;&emsp;3V -> 3V3<br/>
 &emsp;&emsp;PB11 -> CS<br/>
