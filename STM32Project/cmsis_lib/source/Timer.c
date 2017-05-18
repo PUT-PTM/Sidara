@@ -171,12 +171,28 @@ void initTimer3_1HZ(void)
 	TIM_Cmd(TIM3, ENABLE);
 }
 
-//void TIM2_IRQHandler(void)
-//{
-//	if(TIM_GetITStatus(TIM2,TIM_IT_Update) != RESET)
-//	{
-//		GPIO_ToggleBits(GPIOD,GPIO_Pin_12 | GPIO_Pin_14);
-//
-//		TIM_ClearITPendingBit(TIM2,TIM_IT_Update);
-//	}
-//}
+void initTimer5For30msDelay(void)
+{
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, ENABLE);
+
+	TIM_TimeBaseInitTypeDef str;
+	str.TIM_Period=999;
+	str.TIM_Prescaler=2519;
+	str.TIM_ClockDivision=TIM_CKD_DIV1;
+	str.TIM_CounterMode=TIM_CounterMode_Up;
+	TIM_TimeBaseInit(TIM5,&str);
+	TIM_Cmd(TIM5, DISABLE);
+}
+
+/**
+ *
+ * must be configured with
+ * -> initTimer5For30msDelay();
+ */
+void delay30ms(void)
+{
+	TIM_Cmd(TIM5, ENABLE);
+	while(TIM5->CNT < 999) {  }
+	TIM5->CNT = 0;
+	TIM_Cmd(TIM5, DISABLE);
+}

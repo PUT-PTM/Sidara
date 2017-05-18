@@ -77,3 +77,31 @@ void initTimer2ForDebouncing(void)
 	TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
 	TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE );
 }
+
+
+void initNVICForEXTI1(void)
+{
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
+
+	NVIC_InitTypeDef NVIC_InitStructure;
+	NVIC_InitStructure.NVIC_IRQChannel = EXTI1_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x00;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x00;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+}
+
+void initEXTIForGPIOA1(void)
+{
+	EXTI_InitTypeDef EXTI_InitStructure;
+	EXTI_InitStructure.EXTI_Line = EXTI_Line1;
+	EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+	EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling;
+	EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+
+	EXTI_ClearITPendingBit(EXTI_Line1);
+
+	EXTI_Init(&EXTI_InitStructure);
+
+	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOA, EXTI_PinSource1);
+}
