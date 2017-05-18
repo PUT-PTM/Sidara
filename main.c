@@ -30,6 +30,22 @@ bool pause=0;
 char song_time[5]={'0', '0', ':', '0', '0'};
 bool half_second=0;
 
+void USART3_IRQHandler(void)
+{
+	if(USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
+    {
+		sign = readUSARTFromInterruption();
+				if(sign == 'R')
+					GPIO_ToggleBits(GPIOD, GPIO_Pin_14);
+				else if(sign == 'L')
+					GPIO_ToggleBits(GPIOD, GPIO_Pin_12);
+				else if(sign == 'U')
+					GPIO_ToggleBits(GPIOD, GPIO_Pin_13);
+				else if(sign == 'D')
+					GPIO_ToggleBits(GPIOD, GPIO_Pin_15);
+	}
+}
+
 void EXTI0_IRQHandler(void)
 {
 	// drgania stykow
@@ -264,12 +280,10 @@ void Buttons_init()
 {
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD , ENABLE);
 	GPIO_InitTypeDef  Buttons;
-		Buttons.GPIO_Pin = GPIO_Pin_7 | GPIO_Pin_8;;
+		Buttons.GPIO_Pin = GPIO_Pin_2 | GPIO_Pin_3 |GPIO_Pin_0 | GPIO_Pin_5 | GPIO_Pin_6 |GPIO_Pin_7 | GPIO_Pin_8;
 		Buttons.GPIO_Mode = GPIO_Mode_IN;
-		Buttons.GPIO_PuPd = GPIO_PuPd_NOPULL;
+		Buttons.GPIO_PuPd = GPIO_PuPd_UP;
 		GPIO_Init(GPIOD, &Buttons);
-
-
 }
 
 
@@ -490,6 +504,7 @@ bool read_and_send(FRESULT fresult, int position, volatile ITStatus it_status, U
 }
 void play_wav(TCHAR* filename, FRESULT fresult)
 {
+	TIM_Cmd(TIM2, ENABLE);
 	UINT read_bytes;// uzyta w f_read
 	fresult = f_open( &file, filename , FA_READ );
 	if( fresult == FR_OK )
@@ -501,8 +516,15 @@ void play_wav(TCHAR* filename, FRESULT fresult)
 		song_time[2]=':';
 		half_second=0;
 		TIM_Cmd(TIM3, ENABLE);
-		while(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_7)==1)
+		while(1)
 		{
+			if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_7)==1 && GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_8)==1 && GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_6)==1
+					&& GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_5)==1 && GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_0)==1 && GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_3)==1
+					&& GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_2)==1)
+					{
+					break;
+					}
+
 			if (read_and_send(fresult,0, it_status, read_bytes, DMA_FLAG_HTIF5)==0)
 			{
 				break;
@@ -514,9 +536,9 @@ void play_wav(TCHAR* filename, FRESULT fresult)
 
 		}
 		diode_state=0;
+
 		TIM_Cmd(TIM3, DISABLE);
 		fresult = f_close(&file);
-		PCD8544_Clear();
 	}
 }
 bool isWAV(FILINFO fileInfo)
@@ -579,18 +601,6 @@ int main( void )
 		{
 			break;
 		}
-		if(isWAV(fileInfo)==1)// sprawdzenie, czy plik na karcie ma rozszerzenie .wav
-		{
-			if(number_of_songs==0)
-			{
-				first=last=add_last(last,fileInfo);
-			}
-			else
-			{
-				last=add_last(last,fileInfo);
-			}
-			number_of_songs++;
-		}
 	}
 
 
@@ -601,15 +611,44 @@ int main( void )
 	MY_DMA_initM2P();
 	ADC_init();
 	DIODES_INTERRUPT();
-//	RCC_AHB2PeriphClockCmd(RCC_AHB2Periph_RNG, ENABLE);
-//	RNG_Cmd(ENABLE);
+
+	initGPIODiodes();
 
 	for(;;)
 	{
-
+		TIM_Cmd(TIM2, DISABLE);
+		Codec_VolumeCtrl(0);
+		if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_7)==0)
+		{
 		play_wav("c.wav",fresult);
-		play_wav("d.wav", fresult);
-		play_wav("a.wav", fresult);
+		}
+		if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_8)==0)
+				{
+				play_wav("d.wav",fresult);
+				}
+		if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_6)==0)
+						{
+						play_wav("a.wav",fresult);
+						}
+		if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_5)==0)
+								{
+								play_wav("f.wav",fresult);
+								}
+		if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_0)==0)
+										{
+										play_wav("g.wav",fresult);
+										}
+		if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_3)==0)
+												{
+												play_wav("b.wav",fresult);
+												}
+
+		if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_2)==0)
+												{
+												play_wav("e.wav",fresult);
+												}
+
+
 
 
 
