@@ -37,7 +37,7 @@ void initExtBtns(void)
 void initLedSegment(void)
 {
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOE, ENABLE);
-	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE);
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
 
 	GPIO_InitTypeDef strSegments;
 	strSegments.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1| GPIO_Pin_2| GPIO_Pin_3
@@ -55,36 +55,36 @@ void initLedSegment(void)
 	strNumbers.GPIO_OType = GPIO_OType_PP;
 	strNumbers.GPIO_Speed = GPIO_Speed_100MHz;
 	strNumbers.GPIO_PuPd = GPIO_PuPd_NOPULL;
-	GPIO_Init(GPIOB, &strNumbers);
+	GPIO_Init(GPIOC, &strNumbers);
 
 GPIO_SetBits(GPIOE, GPIO_Pin_0 | GPIO_Pin_1| GPIO_Pin_2| GPIO_Pin_3 | GPIO_Pin_4
 					| GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7);
 
-GPIO_ResetBits(GPIOB, GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15);
+GPIO_ResetBits(GPIOC, GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15);
 }
 
 void setLedSegment(int number)
 {
 	if(number == 1)
-		GPIO_SetBits(GPIOB, GPIO_Pin_12);
+		GPIO_SetBits(GPIOC, GPIO_Pin_12);
 	else if(number == 2)
-		GPIO_SetBits(GPIOB, GPIO_Pin_13);
+		GPIO_SetBits(GPIOC, GPIO_Pin_13);
 	else if(number == 3)
-		GPIO_SetBits(GPIOB, GPIO_Pin_14);
+		GPIO_SetBits(GPIOC, GPIO_Pin_14);
 	else if(number == 4)
-		GPIO_SetBits(GPIOB, GPIO_Pin_15);
+		GPIO_SetBits(GPIOC, GPIO_Pin_15);
 }
 
 void resetLedSegment(int number)
 {
 	if(number == 1)
-		GPIO_ResetBits(GPIOB, GPIO_Pin_12);
+		GPIO_ResetBits(GPIOC, GPIO_Pin_12);
 	else if(number == 2)
-		GPIO_ResetBits(GPIOB, GPIO_Pin_13);
+		GPIO_ResetBits(GPIOC, GPIO_Pin_13);
 	else if(number == 3)
-		GPIO_ResetBits(GPIOB, GPIO_Pin_14);
+		GPIO_ResetBits(GPIOC, GPIO_Pin_14);
 	else if(number == 4)
-		GPIO_ResetBits(GPIOB, GPIO_Pin_15);
+		GPIO_ResetBits(GPIOC, GPIO_Pin_15);
 }
 
 void setLedSegmentAndResetOthers(int number)
@@ -161,7 +161,7 @@ void setNumberOnSegments(int number)
 		setNumber0();
 		break;
 	case 11:
-		setNumberDot();
+		setDot();
 		break;
 	}
 }
@@ -216,7 +216,7 @@ void setNumber9(void)
 	GPIO_ResetBits(GPIOE, GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3
 					| GPIO_Pin_5 | GPIO_Pin_6);
 }
-void setNumberDot(void)
+void setDot(void)
 {
 	GPIO_ResetBits(GPIOE, GPIO_Pin_7);
 }

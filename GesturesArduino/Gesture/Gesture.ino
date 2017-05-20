@@ -1,4 +1,4 @@
-/****************************************************************
+  /****************************************************************
 GestureTest.ino
 APDS-9960 RGB and Gesture Sensor
 Shawn Hymel @ SparkFun Electronics
@@ -64,9 +64,6 @@ void setup()
 
   // Initialize Serial port
   Serial.begin(115200, SERIAL_8N1);
-
-
-  
 
   // Initialize interrupt service routine
   attachInterrupt(0, interruptRoutine, FALLING);

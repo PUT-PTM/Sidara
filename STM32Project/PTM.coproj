@@ -101,9 +101,9 @@
     <File name="cmsis_lib/source/Timer.c" path="cmsis_lib/source/Timer.c" type="1"/>
     <File name="cmsis_lib/include/stm32f4xx_adc.h" path="cmsis_lib/include/stm32f4xx_adc.h" type="1"/>
     <File name="cmsis_lib/include/USART.h" path="cmsis_lib/include/USART.h" type="1"/>
+    <File name="cmsis_boot/startup" path="" type="2"/>
     <File name="cmsis_boot/stm32f4xx.h" path="cmsis_boot/stm32f4xx.h" type="1"/>
     <File name="cmsis/core_cm4_simd.h" path="cmsis/core_cm4_simd.h" type="1"/>
-    <File name="cmsis_boot/startup" path="" type="2"/>
     <File name="cmsis_lib/source/stm32f4xx_spi.c" path="cmsis_lib/source/stm32f4xx_spi.c" type="1"/>
     <File name="cmsis_lib/include/stm32f4xx_exti.h" path="cmsis_lib/include/stm32f4xx_exti.h" type="1"/>
     <File name="cmsis_lib/source/stm32f4xx_exti.c" path="cmsis_lib/source/stm32f4xx_exti.c" type="1"/>
@@ -112,8 +112,8 @@
     <File name="cmsis/core_cm4.h" path="cmsis/core_cm4.h" type="1"/>
     <File name="cmsis_lib/include/stm32f4xx_spi.h" path="cmsis_lib/include/stm32f4xx_spi.h" type="1"/>
     <File name="cmsis_lib/source/GPIO.c" path="cmsis_lib/source/GPIO.c" type="1"/>
-    <File name="cmsis" path="" type="2"/>
     <File name="cmsis_lib/source/misc.c" path="cmsis_lib/source/misc.c" type="1"/>
+    <File name="cmsis" path="" type="2"/>
     <File name="cmsis_lib/source/stm32f4xx_adc.c" path="cmsis_lib/source/stm32f4xx_adc.c" type="1"/>
     <File name="cmsis_lib/include/stm32f4xx_tim.h" path="cmsis_lib/include/stm32f4xx_tim.h" type="1"/>
     <File name="cmsis_lib" path="" type="2"/>

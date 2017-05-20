@@ -20,6 +20,6 @@ void setNumber6(void);
 void setNumber7(void);
 void setNumber8(void);
 void setNumber9(void);
-void setNumberDot(void);
+void setDot(void);
 
 #endif
