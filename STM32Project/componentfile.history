@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<History> 
+  <File usedCount="2" path="cmsis_lib/include/stm32f4xx_dma.h"/>  
+  <File usedCount="2" path="cmsis_lib/source/stm32f4xx_dma.c"/>  
+  <File usedCount="2" path="cmsis_lib/include/stm32f4xx_rng.h"/>  
+  <File usedCount="2" path="cmsis_lib/source/stm32f4xx_rng.c"/>
+</History>
