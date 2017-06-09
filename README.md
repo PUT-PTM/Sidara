@@ -27,7 +27,6 @@ Guitar chords on buttons: (from guitar head)
 </ol>
 
 <br/>
-<br/>
 
 #### Working Scheme
 When you hold one of chord buttons and make gesture over optic sensor the sensor generates signal to Arduino which processess gesture and determines which direction it was. Then char with direction (L / R / U / D) goes by USART to STM which determines chord (by pressed button) and its volume (on ADC knob). Then STM generates DAC signal on audio output.
