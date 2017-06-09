@@ -13,7 +13,9 @@ Communication with components:
   <li>USART - Arduino&STM32F4</li>
 </ul>
 
-Guitar chords on buttons: (from guitar head)<br/>
+<br/>
+
+Guitar chords on buttons: (from guitar head)
 <ol>
   <li>High D</li>
   <li>Low D</li>
@@ -24,13 +26,16 @@ Guitar chords on buttons: (from guitar head)<br/>
   <li>A</li>
 </ol>
 
+<br/>
+<br/>
+
 #### Working Scheme
 When you hold one of chord buttons and make gesture over optic sensor the sensor generates signal to Arduino which processess gesture and determines which direction it was. Then char with direction (L / R / U / D) goes by USART to STM which determines chord (by pressed button) and its volume (on ADC knob). Then STM generates DAC signal on audio output.
 <br/>
 <br/>
 
 #### Software
-You will need 3 software to flash everything. First CooCox IDE (we used 1.7.8 version) to compile and flash program to STM32F4. Next You will need ARDUINO IDE (we used 1.8.3 version).
+You will need two IDE's to flash everything. First CooCox IDE (we used 1.7.8 version) to compile and flash program to STM32F4. Next You will need Arduino IDE (we used 1.8.3 version).
 <br/>
 <br/>
 
@@ -40,7 +45,7 @@ Optic sensor connection: (To Arduino)<br/>
   <li>A5 -> SCL</li>
   <li>A4 -> SDA</li>
   <li>GND -> GND</li>
-  <li>3.3V  -> VCC<li>
+  <li>3.3V  -> VCC</li>
   <li>2 -> INT</li>
 </ul>
 
@@ -55,7 +60,7 @@ SD Card Module connection: (To STM32F4)<br/>
   <li>GND -> GND</li>
   <li>3V -> 3.3V</li>
   <li>PB11 -> CS</li>
-  <li>3.3V  -> VCC<li>
+  <li>3.3V  -> VCC</li>
   <li>PB15 -> MOSI</li>
   <li>PB13 -> SCK</li>
   <li>PB14 -> MISO</li>
@@ -68,6 +73,15 @@ ADC connection: (To STM32F4)<br/>
   <li>3V -> VCC</li>
   <li>PA1 -> ADC IN 1</li>
 </ul>
+
+<br/>
+<br/>
+
+#### Licence
+Project is under Apache Software License 2.0
+
+<br/>
+<br/>
 
 Idea, implementation and copyrights to:
 <ul>
