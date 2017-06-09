@@ -31,11 +31,15 @@ int control_counter = 0;
 FRESULT fresult;
 char sign;
 
+int stopFlag = 0;
+int irqFlag = 0;
+
 void Play()
 {
+
 	if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_7)==0)
 					{
-					play_wav("b.wav",fresult);
+					play_wav("h.wav",fresult);
 					}
 					if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_8)==0)
 							{
@@ -43,7 +47,7 @@ void Play()
 							}
 					if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_6)==0)
 									{
-									play_wav("c.wav",fresult);
+									play_wav("a.wav",fresult);
 									}
 					if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_5)==0)
 											{
@@ -51,17 +55,18 @@ void Play()
 											}
 					if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_0)==0)
 													{
-													play_wav("g.wav",fresult);
+													play_wav("f.wav",fresult);
 													}
 					if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_3)==0)
 															{
-															play_wav("f2.wav",fresult);
+															play_wav("d1.wav",fresult);
 															}
 
 					if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_2)==0)
 															{
-															play_wav("f.wav",fresult);
+															play_wav("c.wav",fresult);
 															}
+
 }
 
 void USART3_IRQHandler(void)
@@ -71,20 +76,24 @@ void USART3_IRQHandler(void)
 		sign = readUSARTFromInterruption();
 
 		if(sign == 'R'){
+			stopFlag = 1;
+			irqFlag = 1;
 			GPIO_ToggleBits(GPIOD, GPIO_Pin_14);
-			Play();
 		}
 		else if(sign == 'L'){
+			stopFlag = 1;
+			irqFlag = 1;
 			GPIO_ToggleBits(GPIOD, GPIO_Pin_12);
-		Play();
 		}
 		else if(sign == 'U'){
+			stopFlag = 1;
+			irqFlag = 1;
 			GPIO_ToggleBits(GPIOD, GPIO_Pin_13);
-		Play();
 		}
 		else if(sign == 'D'){
+			stopFlag = 1;
+			irqFlag = 1;
 			GPIO_ToggleBits(GPIOD, GPIO_Pin_15);
-		Play();
 		}
 
 	}
@@ -308,6 +317,7 @@ bool read_and_send(FRESULT fresult, int position, volatile ITStatus it_status, U
 void play_wav(TCHAR* filename, FRESULT fresult)
 {
 	TIM_Cmd(TIM2, ENABLE);
+	irqFlag =0;
 	Codec_VolumeCtrl(result_of_conversion);
 	UINT read_bytes;// uzyta w f_read
 	fresult = f_open( &file, filename , FA_READ );
@@ -320,7 +330,7 @@ void play_wav(TCHAR* filename, FRESULT fresult)
 		song_time[2]=':';
 		half_second=0;
 		TIM_Cmd(TIM3, ENABLE);
-		while(1)
+		while(stopFlag != 1)
 		{
 			if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_7)==1 && GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_8)==1 && GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_6)==1
 					&& GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_5)==1 && GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_0)==1 && GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_3)==1
@@ -340,11 +350,11 @@ void play_wav(TCHAR* filename, FRESULT fresult)
 			}
 
 		}
-	//	diode_state=0;
-
+		Codec_VolumeCtrl(0);
 		TIM_Cmd(TIM3, DISABLE);
 		fresult = f_close(&file);
 	}
+
 }
 bool isWAV(FILINFO fileInfo)
 {
@@ -425,7 +435,16 @@ int main(void)
 
 		for(;;)
 		{
+
+				stopFlag = 0;
+				if(irqFlag!=0)
+				Play();
+
 		}
+
+
+
+
 }
 
 void SysTick_Handler()
