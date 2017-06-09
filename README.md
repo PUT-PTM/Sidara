@@ -79,10 +79,7 @@ ADC connection: (To STM32F4)<br/>
 
 #### Licence
 Project is under Apache Software License 2.0
-
 <br/>
-<br/>
-
 Idea, implementation and copyrights to:
 <ul>
   <li>Michał Sibera (Arebis)</li>
