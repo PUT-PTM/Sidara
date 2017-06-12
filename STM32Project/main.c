@@ -38,34 +38,33 @@ void Play()
 {
 
 	if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_7)==0)
-					{
-					play_wav("h.wav",fresult);
-					}
-					if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_8)==0)
-							{
-							play_wav("d.wav",fresult);
-							}
-					if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_6)==0)
-									{
-									play_wav("a.wav",fresult);
-									}
-					if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_5)==0)
-											{
-											play_wav("g.wav",fresult);
-											}
-					if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_0)==0)
-													{
-													play_wav("f.wav",fresult);
-													}
-					if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_3)==0)
-															{
-															play_wav("d1.wav",fresult);
-															}
-
-					if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_2)==0)
-															{
-															play_wav("c.wav",fresult);
-															}
+	{
+		play_wav("h.wav",fresult);
+	}
+	if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_8)==0)
+	{
+		play_wav("d.wav",fresult);
+	}
+	if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_6)==0)
+	{
+		play_wav("a.wav",fresult);
+	}
+	if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_5)==0)
+	{
+		play_wav("g.wav",fresult);
+	}
+	if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_0)==0)
+	{
+		play_wav("f.wav",fresult);
+	}
+	if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_3)==0)
+	{
+		play_wav("d1.wav",fresult);
+	}
+	if(GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_2)==0)
+	{
+		play_wav("c.wav",fresult);
+	}
 
 }
 
@@ -99,9 +98,7 @@ void USART3_IRQHandler(void)
 	}
 }
 
-
 int i = 0;
-
 
 FATFS fatfs;
 FIL file;
@@ -122,7 +119,6 @@ void TIM2_IRQHandler(void)
 	if(TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
 	{
 		ADC_conversion();
-		//Codec_VolumeCtrl(result_of_conversion);
 		TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
 	}
 
@@ -163,7 +159,6 @@ void TIM3_IRQHandler(void)
 				song_time[0]='0';
 			}
 		}
-	//	spin_diodes();
 		// wyzerowanie flagi wyzwolonego przerwania
 		TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
 
@@ -187,10 +182,10 @@ void Buttons_init()
 {
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD , ENABLE);
 	GPIO_InitTypeDef  Buttons;
-		Buttons.GPIO_Pin = GPIO_Pin_2 | GPIO_Pin_3 |GPIO_Pin_0 | GPIO_Pin_5 | GPIO_Pin_6 |GPIO_Pin_7 | GPIO_Pin_8;
-		Buttons.GPIO_Mode = GPIO_Mode_IN;
-		Buttons.GPIO_PuPd = GPIO_PuPd_UP;
-		GPIO_Init(GPIOD, &Buttons);
+	Buttons.GPIO_Pin = GPIO_Pin_2 | GPIO_Pin_3 |GPIO_Pin_0 | GPIO_Pin_5 | GPIO_Pin_6 |GPIO_Pin_7 | GPIO_Pin_8;
+	Buttons.GPIO_Mode = GPIO_Mode_IN;
+	Buttons.GPIO_PuPd = GPIO_PuPd_UP;
+	GPIO_Init(GPIOD, &Buttons);
 }
 
 void MY_DMA_initM2P()
@@ -425,7 +420,6 @@ int main(void)
 			}
 		}
 
-
 		Buttons_init();
 		codec_init();
 		codec_ctrl_init();
@@ -435,16 +429,10 @@ int main(void)
 
 		for(;;)
 		{
-
 				stopFlag = 0;
 				if(irqFlag!=0)
 				Play();
-
 		}
-
-
-
-
 }
 
 void SysTick_Handler()
