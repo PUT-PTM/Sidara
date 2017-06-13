@@ -21,5 +21,6 @@ void setNumber7(void);
 void setNumber8(void);
 void setNumber9(void);
 void setDot(void);
+void Buttons_init();
 
 #endif

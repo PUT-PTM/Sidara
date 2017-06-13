@@ -220,3 +220,13 @@ void setDot(void)
 {
 	GPIO_ResetBits(GPIOE, GPIO_Pin_7);
 }
+
+void Buttons_init()
+{
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD , ENABLE);
+	GPIO_InitTypeDef  Buttons;
+	Buttons.GPIO_Pin = GPIO_Pin_2 | GPIO_Pin_3 |GPIO_Pin_0 | GPIO_Pin_5 | GPIO_Pin_6 |GPIO_Pin_7 | GPIO_Pin_8;
+	Buttons.GPIO_Mode = GPIO_Mode_IN;
+	Buttons.GPIO_PuPd = GPIO_PuPd_UP;
+	GPIO_Init(GPIOD, &Buttons);
+}
